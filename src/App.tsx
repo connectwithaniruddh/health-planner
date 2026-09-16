@@ -4,6 +4,7 @@ import { Header } from './components/layout/Header';
 import { Sidebar } from './components/layout/Sidebar';
 import { MobileNav } from './components/layout/MobileNav';
 import { FuelGauge } from './components/dashboard/FuelGauge';
+import { FastingWidget } from './components/dashboard/FastingWidget';
 import { StreakWidget } from './components/dashboard/StreakWidget';
 import { BossFightWidget } from './components/dashboard/BossFightWidget';
 import { MacroRings } from './components/dashboard/MacroRings';
@@ -91,8 +92,11 @@ export const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Fuel Gauge Hero Widget */}
-              <FuelGauge />
+              {/* Hero Widgets: Fuel Gauge & Intermittent Fasting */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <FuelGauge />
+                <FastingWidget />
+              </div>
 
               {/* Middle Row Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

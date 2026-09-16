@@ -1,253 +1,662 @@
 [
   {
-    "food_id": "IND_NORTH_001",
+    "food_id": "IND_SNACK_001",
+    "ifct_code": "D010_COOKED",
+    "name": { "english": "Khaman Dhokla", "hindi": "खमन ढोकला", "regional_aliases": ["Dhokla", "Besan Dhokla"] },
+    "category": "Snacks & Street Food",
+    "region": "WEST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 152.0, "carbohydrates_g": 23.0, "protein_g": 6.5, "fat_g": 4.0, "fiber_g": 2.5 },
+    "glycemic_profile": { "index": 48, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Piece (40g)", "gram_weight": 40.0, "is_default": true },
+      { "unit_name": "1 Plate (4 Pieces - 160g)", "gram_weight": 160.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_002",
+    "ifct_code": "D012_COOKED",
+    "name": { "english": "Vada Pav", "hindi": "वड़ा पाव", "regional_aliases": ["Batata Vada Pav", "Bombay Burger"] },
+    "category": "Snacks & Street Food",
+    "region": "WEST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 242.0, "carbohydrates_g": 35.0, "protein_g": 5.0, "fat_g": 9.5, "fiber_g": 3.0 },
+    "glycemic_profile": { "index": 68, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Vada Pav (120g)", "gram_weight": 120.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_003",
+    "ifct_code": "S001_COOKED",
+    "name": { "english": "Samosa (Potato & Peas)", "hindi": "समोसा", "regional_aliases": ["Aloo Samosa", "Singada"] },
+    "category": "Snacks & Street Food",
+    "region": "NORTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 325.0, "carbohydrates_g": 37.5, "protein_g": 5.0, "fat_g": 17.5, "fiber_g": 3.1 },
+    "glycemic_profile": { "index": 70, "category": "HIGH" },
+    "serving_units": [
+      { "unit_name": "1 Piece (80g)", "gram_weight": 80.0, "is_default": true },
+      { "unit_name": "1 Plate (2 Pieces - 160g)", "gram_weight": 160.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_004",
+    "ifct_code": "S004_COOKED",
+    "name": { "english": "Pav Bhaji", "hindi": "पाव भाजी", "regional_aliases": ["Butter Pav Bhaji"] },
+    "category": "Snacks & Street Food",
+    "region": "WEST",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 168.0, "carbohydrates_g": 24.8, "protein_g": 3.6, "fat_g": 6.0, "fiber_g": 2.4 },
+    "glycemic_profile": { "index": 72, "category": "HIGH" },
+    "serving_units": [
+      { "unit_name": "1 Plate (150g Bhaji + 2 Pavs - 250g)", "gram_weight": 250.0, "is_default": true },
+      { "unit_name": "1 Katori Bhaji Only (150g)", "gram_weight": 150.0, "is_default": false },
+      { "unit_name": "1 Pav (50g)", "gram_weight": 50.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_005",
+    "ifct_code": "S005_COOKED",
+    "name": { "english": "Pani Puri / Golgappe", "hindi": "पानी पूरी / गोलगप्पे", "regional_aliases": ["Puchka", "Gupchup", "Pakodi"] },
+    "category": "Snacks & Street Food",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 150.0, "carbohydrates_g": 23.3, "protein_g": 2.5, "fat_g": 5.8, "fiber_g": 1.6 },
+    "glycemic_profile": { "index": 68, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Plate (6 Puris with Water - 120g)", "gram_weight": 120.0, "is_default": true },
+      { "unit_name": "1 Puri (20g)", "gram_weight": 20.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_006",
+    "ifct_code": "S006_COOKED",
+    "name": { "english": "Bhel Puri", "hindi": "भेल पूरी", "regional_aliases": ["Jhal Muri", "Bhel"] },
+    "category": "Snacks & Street Food",
+    "region": "WEST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 185.0, "carbohydrates_g": 32.0, "protein_g": 4.5, "fat_g": 4.8, "fiber_g": 3.0 },
+    "glycemic_profile": { "index": 60, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Plate (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_007",
+    "ifct_code": "S007_COOKED",
+    "name": { "english": "Sev Puri", "hindi": "सेव पूरी", "regional_aliases": ["Sev Batata Puri"] },
+    "category": "Snacks & Street Food",
+    "region": "WEST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 220.0, "carbohydrates_g": 30.0, "protein_g": 4.0, "fat_g": 9.5, "fiber_g": 2.2 },
+    "glycemic_profile": { "index": 65, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Plate (6 Puris - 130g)", "gram_weight": 130.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_008",
+    "ifct_code": "S008_COOKED",
+    "name": { "english": "Dahi Vada / Dahi Bhalla", "hindi": "दही वड़ा / दही भल्ला", "regional_aliases": ["Thayir Vadai", "Dahi Bara"] },
+    "category": "Snacks & Street Food",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 145.0, "carbohydrates_g": 18.0, "protein_g": 5.5, "fat_g": 6.0, "fiber_g": 1.8 },
+    "glycemic_profile": { "index": 52, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Plate (2 Vadas + Curd - 180g)", "gram_weight": 180.0, "is_default": true },
+      { "unit_name": "1 Piece (90g)", "gram_weight": 90.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_009",
+    "ifct_code": "S009_COOKED",
+    "name": { "english": "Steamed Veg Momos", "hindi": "वेज मोमोज़", "regional_aliases": ["Dimsum", "Veg Dumplings"] },
+    "category": "Snacks & Street Food",
+    "region": "EAST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 175.0, "carbohydrates_g": 30.0, "protein_g": 4.2, "fat_g": 4.2, "fiber_g": 1.7 },
+    "glycemic_profile": { "index": 62, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Plate (6 Pieces - 120g)", "gram_weight": 120.0, "is_default": true },
+      { "unit_name": "1 Piece (20g)", "gram_weight": 20.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_010",
+    "ifct_code": "S010_COOKED",
+    "name": { "english": "Moong Sprouts Chaat", "hindi": "मूंग स्प्राउट्स चाट", "regional_aliases": ["Sprouted Moong Salad", "Ankurit Moong"] },
+    "category": "Snacks & Street Food",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 85.0, "carbohydrates_g": 14.0, "protein_g": 6.8, "fat_g": 0.6, "fiber_g": 4.2 },
+    "glycemic_profile": { "index": 25, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_011",
+    "ifct_code": "S011_COOKED",
+    "name": { "english": "Roasted Makhana (Fox Nuts)", "hindi": "रोस्टेड मखाना", "regional_aliases": ["Phool Makhana", "Lotus Seeds"] },
+    "category": "Snacks & Street Food",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 380.0, "carbohydrates_g": 72.0, "protein_g": 9.5, "fat_g": 5.0, "fiber_g": 14.0 },
+    "glycemic_profile": { "index": 45, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Bowl (30g)", "gram_weight": 30.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SNACK_012",
+    "ifct_code": "S012_COOKED",
+    "name": { "english": "Paneer Tikka (Tandoori)", "hindi": "पनीर टिक्का", "regional_aliases": ["Tandoori Paneer"] },
+    "category": "Snacks & Street Food",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 210.0, "carbohydrates_g": 6.0, "protein_g": 14.5, "fat_g": 14.5, "fiber_g": 1.5 },
+    "glycemic_profile": { "index": 30, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Plate (6 Pieces - 150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Piece (25g)", "gram_weight": 25.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_001",
+    "ifct_code": "D005_COOKED",
+    "name": { "english": "Kanda Poha", "hindi": "कांदा पोहा", "regional_aliases": ["Poha", "Avalakki", "Pohe"] },
+    "category": "Breakfast Foods",
+    "region": "WEST",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 146.7, "carbohydrates_g": 24.0, "protein_g": 2.67, "fat_g": 4.67, "fiber_g": 2.0 },
+    "glycemic_profile": { "index": 62, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Plate (200g)", "gram_weight": 200.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_002",
+    "ifct_code": "C012_COOKED",
+    "name": { "english": "Steamed Idli", "hindi": "इडली", "regional_aliases": ["Rice Idli", "Mallipoo Idli"] },
+    "category": "Breakfast Foods",
+    "region": "SOUTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 137.5, "carbohydrates_g": 30.0, "protein_g": 4.5, "fat_g": 0.5, "fiber_g": 2.0 },
+    "glycemic_profile": { "index": 60, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Piece (40g)", "gram_weight": 40.0, "is_default": true },
+      { "unit_name": "1 Plate (2 Idlis - 80g)", "gram_weight": 80.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_003",
+    "ifct_code": "C015_COOKED",
+    "name": { "english": "Plain Dosa", "hindi": "सादा डोसा", "regional_aliases": ["Sada Dosa", "Dosai"] },
+    "category": "Breakfast Foods",
+    "region": "SOUTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 206.2, "carbohydrates_g": 35.0, "protein_g": 4.37, "fat_g": 5.62, "fiber_g": 1.87 },
+    "glycemic_profile": { "index": 64, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Medium Dosa (80g)", "gram_weight": 80.0, "is_default": true },
+      { "unit_name": "1 Large Dosa (120g)", "gram_weight": 120.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_004",
+    "ifct_code": "C016_COOKED",
+    "name": { "english": "Masala Dosa", "hindi": "मसाला डोसा", "regional_aliases": ["Potato Masala Dosa"] },
+    "category": "Breakfast Foods",
+    "region": "SOUTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 215.0, "carbohydrates_g": 32.0, "protein_g": 4.0, "fat_g": 8.0, "fiber_g": 2.5 },
+    "glycemic_profile": { "index": 68, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Masala Dosa (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_005",
+    "ifct_code": "C020_COOKED",
+    "name": { "english": "Rava Upma", "hindi": "रवा उपमा", "regional_aliases": ["Sooji Upma", "Uppittu"] },
+    "category": "Breakfast Foods",
+    "region": "SOUTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 140.0, "carbohydrates_g": 21.3, "protein_g": 3.3, "fat_g": 4.6, "fiber_g": 1.6 },
+    "glycemic_profile": { "index": 65, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Plate (200g)", "gram_weight": 200.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_006",
+    "ifct_code": "B015_COOKED",
+    "name": { "english": "Moong Dal Chilla", "hindi": "मूंग दाल चिल्ला", "regional_aliases": ["Moong Dal Puda", "Pesarattu"] },
+    "category": "Breakfast Foods",
+    "region": "NORTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 170.0, "carbohydrates_g": 22.0, "protein_g": 10.5, "fat_g": 4.5, "fiber_g": 5.0 },
+    "glycemic_profile": { "index": 35, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Medium Chilla (60g)", "gram_weight": 60.0, "is_default": true },
+      { "unit_name": "1 Large Chilla (100g)", "gram_weight": 100.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_007",
+    "ifct_code": "B016_COOKED",
+    "name": { "english": "Besan Chilla", "hindi": "बेसन चिल्ला", "regional_aliases": ["Gram Flour Pancake", "Veg Omelette"] },
+    "category": "Breakfast Foods",
+    "region": "NORTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 185.0, "carbohydrates_g": 24.0, "protein_g": 9.0, "fat_g": 6.0, "fiber_g": 4.5 },
+    "glycemic_profile": { "index": 40, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Medium Chilla (60g)", "gram_weight": 60.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_008",
+    "ifct_code": "W002_COOKED",
+    "name": { "english": "Methi Thepla", "hindi": "मेथी थेपला", "regional_aliases": ["Gujarati Thepla"] },
+    "category": "Breakfast Foods",
+    "region": "WEST",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 314.0, "carbohydrates_g": 45.7, "protein_g": 8.5, "fat_g": 11.4, "fiber_g": 5.7 },
+    "glycemic_profile": { "index": 50, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Piece (35g)", "gram_weight": 35.0, "is_default": true },
+      { "unit_name": "1 Plate (2 Theplas - 70g)", "gram_weight": 70.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_009",
+    "ifct_code": "A020_COOKED",
+    "name": { "english": "Aloo Paratha (With Butter/Oil)", "hindi": "आलू पराठा", "regional_aliases": ["Stuffed Potato Paratha"] },
+    "category": "Breakfast Foods",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 235.0, "carbohydrates_g": 36.0, "protein_g": 4.8, "fat_g": 8.2, "fiber_g": 3.2 },
+    "glycemic_profile": { "index": 66, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Medium Paratha (100g)", "gram_weight": 100.0, "is_default": true },
+      { "unit_name": "1 Large Paratha (140g)", "gram_weight": 140.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_010",
+    "ifct_code": "A021_COOKED",
+    "name": { "english": "Paneer Paratha", "hindi": "पनीर पराठा", "regional_aliases": ["Cottage Cheese Paratha"] },
+    "category": "Breakfast Foods",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 260.0, "carbohydrates_g": 28.0, "protein_g": 10.5, "fat_g": 12.0, "fiber_g": 2.8 },
+    "glycemic_profile": { "index": 52, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Medium Paratha (100g)", "gram_weight": 100.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BREAKFAST_011",
+    "ifct_code": "C025_COOKED",
+    "name": { "english": "Medu Vada", "hindi": "मेदू वड़ा", "regional_aliases": ["Urad Dal Vada", "Garelu"] },
+    "category": "Breakfast Foods",
+    "region": "SOUTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 280.0, "carbohydrates_g": 28.0, "protein_g": 8.0, "fat_g": 15.0, "fiber_g": 4.0 },
+    "glycemic_profile": { "index": 62, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Piece (45g)", "gram_weight": 45.0, "is_default": true },
+      { "unit_name": "1 Plate (2 Vadas - 90g)", "gram_weight": 90.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_001",
     "ifct_code": "A008_COOKED",
-    "name": {
-      "english": "Roti / Chapati",
-      "hindi": "रोटी / चपाती",
-      "regional_aliases": ["Phulka", "Fulka", "Wheat Flatbread"]
-    },
+    "name": { "english": "Roti / Chapati (Whole Wheat)", "hindi": "रोटी / चपाती", "regional_aliases": ["Phulka", "Fulka", "Wheat Flatbread"] },
     "category": "Cereals & Flatbreads",
     "region": "NORTH",
     "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 267.0,
-      "carbohydrates_g": 50.0,
-      "protein_g": 10.0,
-      "fat_g": 1.67,
-      "fiber_g": 8.33
-    },
+    "nutrients_per_100g": { "calories_kcal": 267.0, "carbohydrates_g": 50.0, "protein_g": 10.0, "fat_g": 1.67, "fiber_g": 8.33 },
     "glycemic_profile": { "index": 52, "category": "LOW" },
     "serving_units": [
-      { "unit_name": "1 Medium Roti", "gram_weight": 30.0, "is_default": true },
-      { "unit_name": "1 Large Roti", "gram_weight": 45.0, "is_default": false },
-      { "unit_name": "1 Phulka (No Oil)", "gram_weight": 25.0, "is_default": false },
+      { "unit_name": "1 Medium Roti (30g)", "gram_weight": 30.0, "is_default": true },
+      { "unit_name": "1 Phulka No Oil (25g)", "gram_weight": 25.0, "is_default": false },
+      { "unit_name": "1 Ghee Roti (35g)", "gram_weight": 35.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_NORTH_002",
+    "food_id": "IND_MAIN_002",
     "ifct_code": "B003_COOKED",
-    "name": {
-      "english": "Dal Tadka",
-      "hindi": "दाल तड़का",
-      "regional_aliases": ["Yellow Dal", "Toor Dal Fry", "Arhar Dal"]
-    },
+    "name": { "english": "Dal Tadka (Yellow Toor Dal)", "hindi": "दाल तड़का", "regional_aliases": ["Yellow Dal", "Toor Dal Fry", "Arhar Dal"] },
     "category": "Pulses & Legumes",
     "region": "NORTH",
     "dietary_type": "VEGETARIAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 100.0,
-      "carbohydrates_g": 12.0,
-      "protein_g": 4.67,
-      "fat_g": 3.33,
-      "fiber_g": 3.0
-    },
+    "nutrients_per_100g": { "calories_kcal": 100.0, "carbohydrates_g": 12.0, "protein_g": 4.67, "fat_g": 3.33, "fiber_g": 3.0 },
     "glycemic_profile": { "index": 35, "category": "LOW" },
     "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Small Katori", "gram_weight": 100.0, "is_default": false },
-      { "unit_name": "1 Large Bowl", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Small Katori (100g)", "gram_weight": 100.0, "is_default": false },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_NORTH_003",
+    "food_id": "IND_MAIN_003",
+    "ifct_code": "B005_COOKED",
+    "name": { "english": "Dal Makhani", "hindi": "दाल मखनी", "regional_aliases": ["Black Urad Dal", "Maa Ki Dal"] },
+    "category": "Pulses & Legumes",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 155.0, "carbohydrates_g": 14.5, "protein_g": 5.5, "fat_g": 8.5, "fiber_g": 4.0 },
+    "glycemic_profile": { "index": 42, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_004",
     "ifct_code": "B008_COOKED",
-    "name": {
-      "english": "Paneer Butter Masala",
-      "hindi": "पनीर बटर मसाला",
-      "regional_aliases": ["Paneer Gravy", "Shahi Paneer"]
-    },
+    "name": { "english": "Paneer Butter Masala", "hindi": "पनीर बटर मसाला", "regional_aliases": ["Paneer Gravy", "Shahi Paneer"] },
     "category": "Curries & Gravies",
     "region": "NORTH",
     "dietary_type": "VEGETARIAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 186.7,
-      "carbohydrates_g": 5.33,
-      "protein_g": 7.33,
-      "fat_g": 14.67,
-      "fiber_g": 1.33
-    },
+    "nutrients_per_100g": { "calories_kcal": 186.7, "carbohydrates_g": 5.33, "protein_g": 7.33, "fat_g": 14.67, "fiber_g": 1.33 },
     "glycemic_profile": { "index": 58, "category": "MEDIUM" },
     "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Large Bowl", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_NORTH_004",
+    "food_id": "IND_MAIN_005",
+    "ifct_code": "B009_COOKED",
+    "name": { "english": "Palak Paneer", "hindi": "पालक पनीर", "regional_aliases": ["Spinach Paneer"] },
+    "category": "Curries & Gravies",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 125.0, "carbohydrates_g": 4.0, "protein_g": 7.0, "fat_g": 9.0, "fiber_g": 2.8 },
+    "glycemic_profile": { "index": 28, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_006",
     "ifct_code": "B012_COOKED",
-    "name": {
-      "english": "Chole Masala",
-      "hindi": "छोले मसाला",
-      "regional_aliases": ["Kabuli Chana", "Chickpea Curry"]
-    },
+    "name": { "english": "Chole Masala (Punjabi Chickpeas)", "hindi": "छोले मसाला", "regional_aliases": ["Kabuli Chana", "Chickpea Curry"] },
     "category": "Pulses & Legumes",
     "region": "NORTH",
     "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 140.0,
-      "carbohydrates_g": 17.33,
-      "protein_g": 5.33,
-      "fat_g": 5.33,
-      "fiber_g": 4.0
-    },
+    "nutrients_per_100g": { "calories_kcal": 140.0, "carbohydrates_g": 17.33, "protein_g": 5.33, "fat_g": 5.33, "fiber_g": 4.0 },
     "glycemic_profile": { "index": 38, "category": "LOW" },
     "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Plate", "gram_weight": 200.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_SOUTH_001",
-    "ifct_code": "C012_COOKED",
-    "name": {
-      "english": "Steamed Idli",
-      "hindi": "इडली",
-      "regional_aliases": ["Rice Idli", "Mallipoo Idli"]
-    },
-    "category": "Breakfast Foods",
-    "region": "SOUTH",
+    "food_id": "IND_MAIN_007",
+    "ifct_code": "B013_COOKED",
+    "name": { "english": "Rajma Masala (Kidney Beans)", "hindi": "राजमा मसाला", "regional_aliases": ["Rajma Gravy", "Red Kidney Beans"] },
+    "category": "Pulses & Legumes",
+    "region": "NORTH",
     "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 137.5,
-      "carbohydrates_g": 30.0,
-      "protein_g": 4.5,
-      "fat_g": 0.5,
-      "fiber_g": 2.0
-    },
-    "glycemic_profile": { "index": 60, "category": "MEDIUM" },
+    "nutrients_per_100g": { "calories_kcal": 130.0, "carbohydrates_g": 16.0, "protein_g": 5.3, "fat_g": 4.6, "fiber_g": 3.7 },
+    "glycemic_profile": { "index": 34, "category": "LOW" },
     "serving_units": [
-      { "unit_name": "1 Piece (Medium)", "gram_weight": 40.0, "is_default": true },
-      { "unit_name": "1 Plate (2 Idlis)", "gram_weight": 80.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_SOUTH_002",
-    "ifct_code": "C015_COOKED",
-    "name": {
-      "english": "Plain Dosa",
-      "hindi": "डोसा",
-      "regional_aliases": ["Sada Dosa", "Dosai"]
-    },
-    "category": "Breakfast Foods",
-    "region": "SOUTH",
-    "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 206.2,
-      "carbohydrates_g": 35.0,
-      "protein_g": 4.37,
-      "fat_g": 5.62,
-      "fiber_g": 1.87
-    },
-    "glycemic_profile": { "index": 64, "category": "MEDIUM" },
-    "serving_units": [
-      { "unit_name": "1 Medium Dosa", "gram_weight": 80.0, "is_default": true },
-      { "unit_name": "1 Large Dosa", "gram_weight": 120.0, "is_default": false },
-      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
-    ]
-  },
-  {
-    "food_id": "IND_SOUTH_003",
+    "food_id": "IND_MAIN_008",
     "ifct_code": "C018_COOKED",
-    "name": {
-      "english": "South Indian Sambar",
-      "hindi": "सांबर",
-      "regional_aliases": ["Sambhar", "Vegetable Sambar"]
-    },
+    "name": { "english": "South Indian Sambar", "hindi": "सांबर", "regional_aliases": ["Sambhar", "Vegetable Sambar"] },
     "category": "Curries & Soups",
     "region": "SOUTH",
     "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 73.3,
-      "carbohydrates_g": 9.33,
-      "protein_g": 3.0,
-      "fat_g": 2.67,
-      "fiber_g": 2.33
-    },
+    "nutrients_per_100g": { "calories_kcal": 73.3, "carbohydrates_g": 9.33, "protein_g": 3.0, "fat_g": 2.67, "fiber_g": 2.33 },
     "glycemic_profile": { "index": 42, "category": "LOW" },
     "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Large Bowl", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   },
   {
-    "food_id": "IND_WEST_001",
-    "ifct_code": "D005_COOKED",
-    "name": {
-      "english": "Kanda Poha",
-      "hindi": "कांदा पोहा",
-      "regional_aliases": ["Poha", "Avalakki", "Pohe"]
-    },
-    "category": "Snacks & Breakfast",
-    "region": "WEST",
-    "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 146.7,
-      "carbohydrates_g": 24.0,
-      "protein_g": 2.67,
-      "fat_g": 4.67,
-      "fiber_g": 2.0
-    },
-    "glycemic_profile": { "index": 62, "category": "MEDIUM" },
-    "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Plate", "gram_weight": 200.0, "is_default": false },
-      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
-    ]
-  },
-  {
-    "food_id": "IND_EAST_001",
+    "food_id": "IND_MAIN_009",
     "ifct_code": "E002_COOKED",
-    "name": {
-      "english": "Steamed White Rice",
-      "hindi": "चावल / भात",
-      "regional_aliases": ["Boiled Rice", "Bhat", "Chawal"]
-    },
-    "category": "Cereals",
+    "name": { "english": "Steamed White Rice", "hindi": "चावल / भात", "regional_aliases": ["Boiled Rice", "Bhat", "Chawal"] },
+    "category": "Cereals & Flatbreads",
     "region": "PAN_INDIAN",
     "dietary_type": "VEGAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 126.6,
-      "carbohydrates_g": 27.3,
-      "protein_g": 2.33,
-      "fat_g": 0.33,
-      "fiber_g": 0.67
-    },
+    "nutrients_per_100g": { "calories_kcal": 126.6, "carbohydrates_g": 27.3, "protein_g": 2.33, "fat_g": 0.33, "fiber_g": 0.67 },
     "glycemic_profile": { "index": 73, "category": "HIGH" },
     "serving_units": [
-      { "unit_name": "1 Standard Katori", "gram_weight": 150.0, "is_default": true },
-      { "unit_name": "1 Large Bowl", "gram_weight": 220.0, "is_default": false },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Large Bowl (220g)", "gram_weight": 220.0, "is_default": false },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_010",
+    "ifct_code": "E005_COOKED",
+    "name": { "english": "Vegetable Biryani", "hindi": "वेज बिरयानी", "regional_aliases": ["Veg Pulao", "Biryani"] },
+    "category": "Cereals & Flatbreads",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 165.0, "carbohydrates_g": 28.0, "protein_g": 3.8, "fat_g": 4.5, "fiber_g": 2.2 },
+    "glycemic_profile": { "index": 68, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Standard Plate (250g)", "gram_weight": 250.0, "is_default": true },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_011",
+    "ifct_code": "E008_COOKED",
+    "name": { "english": "Moong Dal Khichdi", "hindi": "मूंग दाल खिचड़ी", "regional_aliases": ["Dal Khichdi", "Khichuri"] },
+    "category": "Cereals & Flatbreads",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 120.0, "carbohydrates_g": 20.0, "protein_g": 4.5, "fat_g": 2.5, "fiber_g": 2.0 },
+    "glycemic_profile": { "index": 48, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Bowl (200g)", "gram_weight": 200.0, "is_default": true },
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_012",
+    "ifct_code": "V001_COOKED",
+    "name": { "english": "Bhindi Masala (Okra)", "hindi": "भिंडी मसाला", "regional_aliases": ["Bhindi Fry", "Ladies Finger"] },
+    "category": "Curries & Gravies",
+    "region": "NORTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 95.0, "carbohydrates_g": 8.0, "protein_g": 2.2, "fat_g": 6.0, "fiber_g": 3.5 },
+    "glycemic_profile": { "index": 30, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_013",
+    "ifct_code": "V002_COOKED",
+    "name": { "english": "Aloo Gobi Sabzi", "hindi": "आलू गोभी", "regional_aliases": ["Potato Cauliflower Curry"] },
+    "category": "Curries & Gravies",
+    "region": "NORTH",
+    "dietary_type": "VEGAN",
+    "nutrients_per_100g": { "calories_kcal": 110.0, "carbohydrates_g": 14.0, "protein_g": 2.8, "fat_g": 5.0, "fiber_g": 3.0 },
+    "glycemic_profile": { "index": 55, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_014",
+    "ifct_code": "M001_COOKED",
+    "name": { "english": "Indian Chicken Curry", "hindi": "चिकन करी", "regional_aliases": ["Tariwala Chicken", "Murgh Curry"] },
+    "category": "Curries & Gravies",
+    "region": "NORTH",
+    "dietary_type": "NON_VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 165.0, "carbohydrates_g": 3.5, "protein_g": 18.0, "fat_g": 9.0, "fiber_g": 0.8 },
+    "glycemic_profile": { "index": 20, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (2 Pieces + Gravy - 180g)", "gram_weight": 180.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_MAIN_015",
+    "ifct_code": "M005_COOKED",
+    "name": { "english": "Egg Curry (Boiled Eggs in Gravy)", "hindi": "अंडा करी", "regional_aliases": ["Anda Curry"] },
+    "category": "Curries & Gravies",
+    "region": "PAN_INDIAN",
+    "dietary_type": "EGGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 140.0, "carbohydrates_g": 4.0, "protein_g": 11.0, "fat_g": 8.8, "fiber_g": 0.9 },
+    "glycemic_profile": { "index": 25, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Serving (2 Eggs + Gravy - 180g)", "gram_weight": 180.0, "is_default": true },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BEV_001",
+    "ifct_code": "B050_COOKED",
+    "name": { "english": "Masala Chai (With Milk & 1 tsp Sugar)", "hindi": "मसाला चाय", "regional_aliases": ["Tea", "Indian Milk Tea"] },
+    "category": "Beverages & Dairy",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 65.0, "carbohydrates_g": 8.5, "protein_g": 2.2, "fat_g": 2.4, "fiber_g": 0.0 },
+    "glycemic_profile": { "index": 60, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Standard Cup (150ml)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Small Cutting Chai (80ml)", "gram_weight": 80.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BEV_002",
+    "ifct_code": "B052_COOKED",
+    "name": { "english": "Salted Chaas / Buttermilk", "hindi": "छाछ / मट्ठा", "regional_aliases": ["Moru", "Mattha", "Spiced Buttermilk"] },
+    "category": "Beverages & Dairy",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 28.0, "carbohydrates_g": 2.5, "protein_g": 1.8, "fat_g": 1.0, "fiber_g": 0.0 },
+    "glycemic_profile": { "index": 25, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Glass (200ml)", "gram_weight": 200.0, "is_default": true },
+      { "unit_name": "1 Large Mug (300ml)", "gram_weight": 300.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_BEV_003",
+    "ifct_code": "B055_COOKED",
+    "name": { "english": "Sweet Lassi", "hindi": "मीठी लस्सी", "regional_aliases": ["Punjabi Lassi"] },
+    "category": "Beverages & Dairy",
+    "region": "NORTH",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 110.0, "carbohydrates_g": 16.0, "protein_g": 3.5, "fat_g": 3.8, "fiber_g": 0.0 },
+    "glycemic_profile": { "index": 65, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Glass (250ml)", "gram_weight": 250.0, "is_default": true }
+    ]
+  },
+  {
+    "food_id": "IND_BEV_004",
+    "ifct_code": "D080_COOKED",
+    "name": { "english": "Curd / Plain Dahi", "hindi": "दही", "regional_aliases": ["Yogurt", "Thayir", "Perugu"] },
+    "category": "Beverages & Dairy",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 60.0, "carbohydrates_g": 4.5, "protein_g": 3.5, "fat_g": 3.0, "fiber_g": 0.0 },
+    "glycemic_profile": { "index": 35, "category": "LOW" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
+      { "unit_name": "1 Small Katori (100g)", "gram_weight": 100.0, "is_default": false }
     ]
   },
   {
     "food_id": "IND_SWEET_001",
     "ifct_code": "S002_COOKED",
-    "name": {
-      "english": "Gulab Jamun",
-      "hindi": "गुलाब जामुन",
-      "regional_aliases": ["Gulab Jam"]
-    },
+    "name": { "english": "Gulab Jamun", "hindi": "गुलाब जामुन", "regional_aliases": ["Gulab Jam"] },
     "category": "Sweets & Desserts",
     "region": "PAN_INDIAN",
     "dietary_type": "VEGETARIAN",
-    "nutrients_per_100g": {
-      "calories_kcal": 350.0,
-      "carbohydrates_g": 52.0,
-      "protein_g": 5.0,
-      "fat_g": 14.0,
-      "fiber_g": 0.6
-    },
+    "nutrients_per_100g": { "calories_kcal": 350.0, "carbohydrates_g": 52.0, "protein_g": 5.0, "fat_g": 14.0, "fiber_g": 0.6 },
     "glycemic_profile": { "index": 78, "category": "HIGH" },
     "serving_units": [
-      { "unit_name": "1 Piece (with syrup)", "gram_weight": 50.0, "is_default": true },
-      { "unit_name": "1 Small Bowl (2 Pcs)", "gram_weight": 100.0, "is_default": false },
+      { "unit_name": "1 Piece with syrup (50g)", "gram_weight": 50.0, "is_default": true },
+      { "unit_name": "1 Bowl (2 Pieces - 100g)", "gram_weight": 100.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SWEET_002",
+    "ifct_code": "S003_COOKED",
+    "name": { "english": "Rasgulla", "hindi": "रसगुल्ला", "regional_aliases": ["Roshogolla"] },
+    "category": "Sweets & Desserts",
+    "region": "EAST",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 186.0, "carbohydrates_g": 38.0, "protein_g": 4.0, "fat_g": 1.8, "fiber_g": 0.0 },
+    "glycemic_profile": { "index": 70, "category": "HIGH" },
+    "serving_units": [
+      { "unit_name": "1 Piece (45g)", "gram_weight": 45.0, "is_default": true },
+      { "unit_name": "1 Bowl (2 Pieces - 90g)", "gram_weight": 90.0, "is_default": false },
+      { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
+    ]
+  },
+  {
+    "food_id": "IND_SWEET_003",
+    "ifct_code": "S005_COOKED",
+    "name": { "english": "Rice Kheer", "hindi": "चावल की खीर", "regional_aliases": ["Payasam", "Phirni"] },
+    "category": "Sweets & Desserts",
+    "region": "PAN_INDIAN",
+    "dietary_type": "VEGETARIAN",
+    "nutrients_per_100g": { "calories_kcal": 153.0, "carbohydrates_g": 22.5, "protein_g": 3.7, "fat_g": 5.3, "fiber_g": 0.3 },
+    "glycemic_profile": { "index": 66, "category": "MEDIUM" },
+    "serving_units": [
+      { "unit_name": "1 Standard Katori (150g)", "gram_weight": 150.0, "is_default": true },
       { "unit_name": "Grams", "gram_weight": 1.0, "is_default": false }
     ]
   }

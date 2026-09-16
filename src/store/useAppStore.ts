@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { HealthPlannerStore, UserProfile, FoodLogEntry, ExerciseLogEntry, MedicalMarker } from '../schemas/store.schema';
+import { HealthPlannerStore, UserProfile, FoodLogEntry, ExerciseLogEntry, MedicalMarker, FastingState } from '../schemas/store.schema';
 import { CURRENT_SCHEMA_VERSION } from '../config/constants';
 import { loadLocalStore, saveLocalStore } from '../db/indexedDb';
 import { calculateBMR, calculateTDEE, calculateTargetCalories } from '../utils/calculations';
@@ -7,12 +7,14 @@ import { calculateBMR, calculateTDEE, calculateTargetCalories } from '../utils/c
 interface AppStoreState {
   store: HealthPlannerStore;
   isInitialized: boolean;
-  activeTab: 'dashboard' | 'food' | 'calculators' | 'profile' | 'reports' | 'sync';
+  activeTab: 'dashboard' | 'food' | 'fasting' | 'calculators' | 'profile' | 'reports' | 'sync';
   selectedDate: string; // YYYY-MM-DD
   setActiveTab: (tab: AppStoreState['activeTab']) => void;
   setSelectedDate: (date: string) => void;
   initStore: () => Promise<void>;
   updateProfile: (profileData: Partial<UserProfile>) => Promise<void>;
+  startFast: (targetHours?: number) => Promise<void>;
+  endFast: () => Promise<void>;
   logFoodItem: (entry: Omit<FoodLogEntry, 'id' | 'loggedAt'>) => Promise<void>;
   deleteFoodItem: (foodLogId: string) => Promise<void>;
   logExercise: (entry: Omit<ExerciseLogEntry, 'id' | 'loggedAt'>) => Promise<void>;
@@ -35,6 +37,7 @@ const DEFAULT_PROFILE: UserProfile = {
   targetWeightKg: 62,
   weeklyTargetKg: '0.50',
   activityLevel: 'lightly_active',
+  dietMode: 'intermittent_fasting_16_8',
   medicalConditions: [],
   dietaryRestrictions: ['Vegetarian'],
   allergies: [],
@@ -50,6 +53,12 @@ const INITIAL_STORE: HealthPlannerStore = {
     deviceId: crypto.randomUUID(),
   },
   profile: DEFAULT_PROFILE,
+  fastingState: {
+    isFasting: true,
+    fastStartTime: new Date(Date.now() - 14 * 60 * 60 * 1000).toISOString(), // 14 hours into fast by default
+    fastTargetHours: 16,
+    fastEndTime: null,
+  },
   dailyLogs: {},
   medicalMarkers: [
     {
@@ -117,7 +126,6 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
     const state = get();
     const updatedProfile: UserProfile = { ...state.store.profile, ...profileData };
 
-    // Recalculate BMR, TDEE, Target Calories
     const bmr = calculateBMR({
       weightKg: updatedProfile.currentWeightKg,
       heightCm: updatedProfile.heightCm,
@@ -135,6 +143,45 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
       ...state.store,
       profile: updatedProfile,
       meta: { ...state.store.meta, lastModified: new Date().toISOString() },
+    };
+
+    set({ store: updatedStore });
+    await saveLocalStore(updatedStore);
+  },
+
+  startFast: async (targetHours = 16) => {
+    const state = get();
+    const now = new Date().toISOString();
+    const updatedFasting: FastingState = {
+      isFasting: true,
+      fastStartTime: now,
+      fastTargetHours: targetHours,
+      fastEndTime: null,
+    };
+
+    const updatedStore: HealthPlannerStore = {
+      ...state.store,
+      fastingState: updatedFasting,
+      meta: { ...state.store.meta, lastModified: now },
+    };
+
+    set({ store: updatedStore });
+    await saveLocalStore(updatedStore);
+  },
+
+  endFast: async () => {
+    const state = get();
+    const now = new Date().toISOString();
+    const updatedFasting: FastingState = {
+      ...state.store.fastingState,
+      isFasting: false,
+      fastEndTime: now,
+    };
+
+    const updatedStore: HealthPlannerStore = {
+      ...state.store,
+      fastingState: updatedFasting,
+      meta: { ...state.store.meta, lastModified: now },
     };
 
     set({ store: updatedStore });

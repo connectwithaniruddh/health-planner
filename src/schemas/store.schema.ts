@@ -12,12 +12,28 @@ export const UserProfileSchema = z.object({
   targetWeightKg: z.number().positive(),
   weeklyTargetKg: z.enum(['0.25', '0.50', '0.75', '1.00']),
   activityLevel: z.enum(['sedentary', 'lightly_active', 'moderately_active', 'very_active', 'extra_active']),
+  dietMode: z.enum([
+    'balanced_desi',
+    'intermittent_fasting_16_8',
+    'intermittent_fasting_18_6',
+    'intermittent_fasting_14_10',
+    'omad_23_1',
+    'high_protein_desi',
+    'low_carb_desi',
+  ]).default('intermittent_fasting_16_8'),
   medicalConditions: z.array(z.string()).default([]),
   dietaryRestrictions: z.array(z.string()).default([]),
   allergies: z.array(z.string()).default([]),
   calculatedBmr: z.number().positive(),
   calculatedTdee: z.number().positive(),
   targetDailyCalories: z.number().positive(),
+});
+
+export const FastingStateSchema = z.object({
+  isFasting: z.boolean().default(false),
+  fastStartTime: z.string().nullable().default(null),
+  fastTargetHours: z.number().positive().default(16),
+  fastEndTime: z.string().nullable().default(null),
 });
 
 export const FoodLogEntrySchema = z.object({
@@ -98,7 +114,13 @@ export const HealthPlannerStoreSchema = z.object({
     deviceId: z.string(),
   }),
   profile: UserProfileSchema,
-  dailyLogs: z.record(z.string(), DailyLogSchema), // Map YYYY-MM-DD -> DailyLog
+  fastingState: FastingStateSchema.default({
+    isFasting: false,
+    fastStartTime: null,
+    fastTargetHours: 16,
+    fastEndTime: null,
+  }),
+  dailyLogs: z.record(z.string(), DailyLogSchema),
   medicalMarkers: z.array(MedicalMarkerSchema).default([]),
   gamification: GamificationStateSchema,
   settings: AppSettingsSchema,
@@ -106,6 +128,7 @@ export const HealthPlannerStoreSchema = z.object({
 
 export type HealthPlannerStore = z.infer<typeof HealthPlannerStoreSchema>;
 export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type FastingState = z.infer<typeof FastingStateSchema>;
 export type FoodLogEntry = z.infer<typeof FoodLogEntrySchema>;
 export type ExerciseLogEntry = z.infer<typeof ExerciseLogEntrySchema>;
 export type DailyLog = z.infer<typeof DailyLogSchema>;

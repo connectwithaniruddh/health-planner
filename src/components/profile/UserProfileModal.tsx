@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { UserProfile } from '../../schemas/store.schema';
-import { User, ShieldAlert, HeartPulse, Sparkles, Check } from 'lucide-react';
+import { User, ShieldAlert, HeartPulse, Sparkles, Check, Timer } from 'lucide-react';
 
 export const UserProfileModal: React.FC = () => {
   const { store, updateProfile } = useAppStore();
@@ -16,11 +16,22 @@ export const UserProfileModal: React.FC = () => {
     targetWeightKg: profile.targetWeightKg,
     weeklyTargetKg: profile.weeklyTargetKg,
     activityLevel: profile.activityLevel,
+    dietMode: profile.dietMode || 'intermittent_fasting_16_8',
     medicalConditions: profile.medicalConditions || [],
     dietaryRestrictions: profile.dietaryRestrictions || [],
   });
 
   const [savedSuccess, setSavedSuccess] = useState(false);
+
+  const dietModeOptions = [
+    { id: 'intermittent_fasting_16_8', label: 'Intermittent Fasting 16:8', desc: '16h Fasting / 8h Eating window' },
+    { id: 'intermittent_fasting_18_6', label: 'Intermittent Fasting 18:6', desc: '18h Fasting / 6h Eating window' },
+    { id: 'intermittent_fasting_14_10', label: 'Intermittent Fasting 14:10', desc: '14h Fasting / 10h Eating window' },
+    { id: 'omad_23_1', label: 'OMAD (23:1)', desc: 'One Meal A Day protocol' },
+    { id: 'high_protein_desi', label: 'High Protein Desi', desc: '1.8-2.2g Protein/kg for muscle retention' },
+    { id: 'low_carb_desi', label: 'Low Carb Desi', desc: 'Reduced grain, high veggie & paneer' },
+    { id: 'balanced_desi', label: 'Balanced Desi Deficit', desc: '50% Carb, 20% Protein, 30% Fat split' },
+  ];
 
   const medicalConditionOptions = [
     'Hypertension (High BP)',
@@ -61,7 +72,7 @@ export const UserProfileModal: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold font-rounded text-white">User Profile & Clinical Settings</h2>
-            <p className="text-xs text-slate-400">Biometrics, target goals, dietary restrictions & medical profile</p>
+            <p className="text-xs text-slate-400">Diet Modes, Fasting Protocol, Biometrics & Clinical Profile</p>
           </div>
         </div>
 
@@ -70,6 +81,31 @@ export const UserProfileModal: React.FC = () => {
             <Check className="w-4 h-4" /> Profile Updated!
           </span>
         )}
+      </div>
+
+      {/* Diet Mode Selector Card */}
+      <div className="p-6 rounded-4xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl space-y-4">
+        <div className="flex items-center gap-2 text-purple-400">
+          <Timer className="w-5 h-5" />
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-200">Diet Mode & Fasting Protocol</h3>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          {dietModeOptions.map((mode) => (
+            <div
+              key={mode.id}
+              onClick={() => setFormData({ ...formData, dietMode: mode.id as any })}
+              className={`p-3.5 rounded-2xl border cursor-pointer transition-all ${
+                formData.dietMode === mode.id
+                  ? 'bg-purple-600/20 border-purple-500/50 text-white shadow-lg shadow-purple-500/10'
+                  : 'bg-slate-800/40 border-slate-700/40 text-slate-400 hover:bg-slate-800'
+              }`}
+            >
+              <span className="font-bold text-sm text-slate-100 block">{mode.label}</span>
+              <span className="text-[11px] text-slate-400">{mode.desc}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Basic Demographics */}
