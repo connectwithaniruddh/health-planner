@@ -21,8 +21,8 @@ export const MobileNav: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed bottom-4 inset-x-4 z-50 md:hidden">
-      <div className="h-16 px-3 bg-slate-900/80 backdrop-blur-2xl border border-slate-700/60 rounded-full shadow-2xl shadow-black/80 flex items-center justify-around">
+    <nav className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 md:hidden w-[92vw] max-w-sm pointer-events-auto">
+      <div className="h-16 px-2 bg-[#1C1C1E]/90 backdrop-blur-2xl border border-white/15 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.85)] grid grid-cols-5 items-center justify-items-center">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -32,9 +32,10 @@ export const MobileNav: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-blue-500/40 border-2 border-slate-900 active:scale-95 transition-all"
+                aria-label={item.label}
+                className="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-emerald-500/35 border-2 border-[#1C1C1E] active:scale-95 transition-all"
               >
-                <Icon className="w-6 h-6" />
+                <Icon className="w-5 h-5 stroke-[2.5]" />
               </button>
             );
           }
@@ -43,12 +44,13 @@ export const MobileNav: React.FC = () => {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center gap-1 transition-all ${
-                isActive ? 'text-blue-400 scale-105' : 'text-slate-400 hover:text-slate-200'
+              className={`flex flex-col items-center justify-center gap-0.5 py-1 w-full transition-all ${
+                isActive ? 'text-emerald-400 font-bold' : 'text-neutral-400 hover:text-white font-medium'
               }`}
             >
-              <Icon className="w-5 h-5" />
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <Icon className="w-4 h-4 stroke-[2]" />
+              <span className="text-[10px] tracking-tight">{item.label}</span>
+              {isActive && <span className="w-1 h-1 rounded-full bg-emerald-400 mt-0.5" />}
             </button>
           );
         })}

@@ -27,8 +27,9 @@ export default {
         '5xl': '40px',
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'sans-serif'],
-        rounded: ['"SF Pro Rounded"', '-apple-system', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Plus Jakarta Sans"', 'Helvetica', 'Arial', 'sans-serif'],
+        rounded: ['"SF Pro Rounded"', '-apple-system', '"Plus Jakarta Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       backdropBlur: {
         '3xl': '32px',
