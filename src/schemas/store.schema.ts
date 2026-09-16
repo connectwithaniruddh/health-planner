@@ -12,6 +12,9 @@ export const UserProfileSchema = z.object({
   targetWeightKg: z.number().positive(),
   weeklyTargetKg: z.enum(['0.25', '0.50', '0.75', '1.00']),
   activityLevel: z.enum(['sedentary', 'lightly_active', 'moderately_active', 'very_active', 'extra_active']),
+  dietaryPreference: z.enum(['pure_veg', 'vegan', 'eggetarian', 'non_veg']).default('pure_veg'),
+  primaryGoal: z.string().default('Lose Fat & Reverse Metabolic Conditions'),
+  isOnboarded: z.boolean().default(false),
   dietMode: z.enum([
     'balanced_desi',
     'intermittent_fasting_16_8',
@@ -81,6 +84,7 @@ export const DailyLogSchema = z.object({
   sleepHours: z.number().min(0).max(24).default(0),
   foodLogs: z.array(FoodLogEntrySchema).default([]),
   exerciseLogs: z.array(ExerciseLogEntrySchema).default([]),
+  habits: z.record(z.string(), z.boolean()).default({}),
   notes: z.string().default(''),
   updatedAt: z.string(),
 });

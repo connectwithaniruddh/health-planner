@@ -7,13 +7,15 @@ import { syncFastingWindowToCalendar, sync30DayMealPlanToCalendar } from '../../
 import { syncDailyChecklistToTasks } from '../../services/google/tasks.service';
 import { sendWeeklyDigestEmail } from '../../services/google/gmail.service';
 import { generate30DayIndianMealPlan } from '../../utils/mealPlanGenerator';
-import { Cloud, Check, AlertCircle, RefreshCw, Calendar, CheckSquare, Mail, Timer, Utensils, Sparkles } from 'lucide-react';
+import { MealPlanModal } from '../mealplan/MealPlanModal';
+import { Cloud, Check, AlertCircle, RefreshCw, Calendar, CheckSquare, Mail, Timer, Utensils, Sparkles, Eye } from 'lucide-react';
 
 export const GoogleSyncModal: React.FC = () => {
   const { store, setCompleteStore } = useAppStore();
   const { status, setSyncStatus } = useSyncStore();
   const [userEmail, setUserEmail] = useState('user@example.com');
   const [actionStatus, setActionStatus] = useState<string | null>(null);
+  const [showMealPlanModal, setShowMealPlanModal] = useState(false);
 
   const handleConnectGoogle = async () => {
     await initGoogleAuthSDK();
@@ -191,11 +193,11 @@ export const GoogleSyncModal: React.FC = () => {
             </p>
           </div>
           <button
-            onClick={handleSync30DayMealPlan}
+            onClick={() => setShowMealPlanModal(true)}
             className="w-full py-3 rounded-2xl bg-amber-600/30 hover:bg-amber-600/50 border border-amber-500/40 text-amber-200 font-bold text-xs transition-all flex items-center justify-center gap-2"
           >
-            <Calendar className="w-4 h-4" />
-            <span>Export 30-Day Indian Menu to Calendar</span>
+            <Eye className="w-4 h-4" />
+            <span>Preview, Pick & Export Meal Plan to Calendar</span>
           </button>
         </div>
 
@@ -247,6 +249,8 @@ export const GoogleSyncModal: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {showMealPlanModal && <MealPlanModal onClose={() => setShowMealPlanModal(false)} />}
     </div>
   );
 };

@@ -24,6 +24,8 @@ interface AppStoreState {
   logSleep: (hours: number) => Promise<void>;
   addMedicalMarker: (marker: Omit<MedicalMarker, 'id'>) => Promise<void>;
   deleteMedicalMarker: (markerId: string) => Promise<void>;
+  completeOnboarding: (profileData: Partial<UserProfile>) => Promise<void>;
+  toggleDailyHabit: (habitKey: string, completed?: boolean) => Promise<void>;
   setCompleteStore: (newStore: HealthPlannerStore) => Promise<void>;
 }
 
@@ -37,6 +39,9 @@ const DEFAULT_PROFILE: UserProfile = {
   targetWeightKg: 62,
   weeklyTargetKg: '0.50',
   activityLevel: 'lightly_active',
+  dietaryPreference: 'pure_veg',
+  primaryGoal: 'Lose Fat & Reverse Metabolic Conditions',
+  isOnboarded: false,
   dietMode: 'intermittent_fasting_16_8',
   medicalConditions: [],
   dietaryRestrictions: ['Vegetarian'],
@@ -109,6 +114,9 @@ function sanitizeAndMergeStore(rawStore: any): HealthPlannerStore {
     profile: {
       ...DEFAULT_PROFILE,
       ...(rawStore.profile || {}),
+      isOnboarded: rawStore.profile?.isOnboarded ?? false,
+      dietaryPreference: rawStore.profile?.dietaryPreference || 'pure_veg',
+      primaryGoal: rawStore.profile?.primaryGoal || 'Lose Fat & Reverse Metabolic Conditions',
       dietMode: rawStore.profile?.dietMode || 'intermittent_fasting_16_8',
       medicalConditions: Array.isArray(rawStore.profile?.medicalConditions) ? rawStore.profile.medicalConditions : [],
       dietaryRestrictions: Array.isArray(rawStore.profile?.dietaryRestrictions) ? rawStore.profile.dietaryRestrictions : ['Vegetarian'],
@@ -444,6 +452,83 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
       medicalMarkers: [...state.store.medicalMarkers, newMarker],
       meta: { ...state.store.meta, lastModified: new Date().toISOString() },
     };
+    set({ store: updatedStore });
+    await saveLocalStore(updatedStore);
+  },
+
+  completeOnboarding: async (profileData) => {
+    const state = get();
+    const now = new Date().toISOString();
+    const mergedProfile: UserProfile = {
+      ...state.store.profile,
+      ...profileData,
+      isOnboarded: true,
+    };
+
+    const bmr = calculateBMR({
+      weightKg: mergedProfile.currentWeightKg,
+      heightCm: mergedProfile.heightCm,
+      age: mergedProfile.age,
+      gender: mergedProfile.gender,
+    });
+    const tdee = calculateTDEE(bmr, mergedProfile.activityLevel);
+    const targetDailyCalories = calculateTargetCalories(tdee, mergedProfile.weeklyTargetKg, mergedProfile.gender);
+
+    mergedProfile.calculatedBmr = bmr;
+    mergedProfile.calculatedTdee = tdee;
+    mergedProfile.targetDailyCalories = targetDailyCalories;
+
+    // Gamification starter perk
+    const gamification = {
+      ...state.store.gamification,
+      totalXp: state.store.gamification.totalXp + 100,
+      unlockedBadges: Array.from(new Set([...state.store.gamification.unlockedBadges, 'Pioneer Health Hero'])),
+    };
+
+    const updatedStore: HealthPlannerStore = {
+      ...state.store,
+      profile: mergedProfile,
+      gamification,
+      meta: { ...state.store.meta, lastModified: now },
+    };
+
+    set({ store: updatedStore });
+    await saveLocalStore(updatedStore);
+  },
+
+  toggleDailyHabit: async (habitKey, completed) => {
+    const state = get();
+    const date = state.selectedDate;
+    const now = new Date().toISOString();
+    const existingLog = state.store.dailyLogs[date] || {
+      date,
+      waterMl: 0,
+      sleepHours: 0,
+      foodLogs: [],
+      exerciseLogs: [],
+      habits: {},
+      notes: '',
+      updatedAt: now,
+    };
+
+    const currentStatus = existingLog.habits?.[habitKey] ?? false;
+    const newStatus = completed !== undefined ? completed : !currentStatus;
+
+    const updatedDailyLog = {
+      ...existingLog,
+      habits: {
+        ...(existingLog.habits || {}),
+        [habitKey]: newStatus,
+      },
+      updatedAt: now,
+    };
+
+    const updatedStore: HealthPlannerStore = {
+      ...state.store,
+      dailyLogs: { ...state.store.dailyLogs, [date]: updatedDailyLog },
+      meta: { ...state.store.meta, lastModified: now },
+    };
+
     set({ store: updatedStore });
     await saveLocalStore(updatedStore);
   },

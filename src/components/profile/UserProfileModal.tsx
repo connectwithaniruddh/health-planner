@@ -139,47 +139,67 @@ export const UserProfileModal: React.FC = () => {
           <div>
             <label className="block text-slate-400 mb-1">Age (Years):</label>
             <input
-              type="number"
-              value={formData.age}
-              onChange={(e) => setFormData({ ...formData, age: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white font-medium"
+              type="text"
+              inputMode="numeric"
+              placeholder="--"
+              value={formData.age || ''}
+              onChange={(e) => {
+                const clean = e.target.value.replace(/\D/g, '');
+                setFormData({ ...formData, age: clean === '' ? 0 : parseInt(clean, 10) });
+              }}
+              className="w-full px-3 py-2 bg-neutral-800 border border-white/10 rounded-xl text-white font-medium placeholder:text-slate-600 tabular-nums outline-none focus:border-emerald-400"
             />
           </div>
         </div>
       </div>
 
       {/* Biometrics & Weight Loss Target */}
-      <div className="p-6 rounded-4xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl space-y-4">
+      <div className="p-6 rounded-3xl bg-neutral-900/60 border border-white/10 backdrop-blur-xl space-y-4">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">Biometrics & Target Loss Speed</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
           <div>
             <label className="block text-slate-400 mb-1">Height (cm):</label>
             <input
-              type="number"
-              value={formData.heightCm}
-              onChange={(e) => setFormData({ ...formData, heightCm: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white font-medium"
+              type="text"
+              inputMode="decimal"
+              placeholder="--"
+              value={formData.heightCm || ''}
+              onChange={(e) => {
+                const clean = e.target.value.replace(/[^0-9.]/g, '');
+                setFormData({ ...formData, heightCm: clean === '' ? 0 : parseFloat(clean) });
+              }}
+              className="w-full px-3 py-2 bg-neutral-800 border border-white/10 rounded-xl text-white font-medium placeholder:text-slate-600 tabular-nums outline-none focus:border-emerald-400"
             />
           </div>
 
           <div>
             <label className="block text-slate-400 mb-1">Current Weight (kg):</label>
             <input
-              type="number"
-              value={formData.currentWeightKg}
-              onChange={(e) => setFormData({ ...formData, currentWeightKg: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white font-medium"
+              type="text"
+              inputMode="decimal"
+              placeholder="--"
+              value={formData.currentWeightKg || ''}
+              onChange={(e) => {
+                const clean = e.target.value.replace(/[^0-9.]/g, '');
+                setFormData({ ...formData, currentWeightKg: clean === '' ? 0 : parseFloat(clean) });
+              }}
+              className="w-full px-3 py-2 bg-neutral-800 border border-white/10 rounded-xl text-white font-medium placeholder:text-slate-600 tabular-nums outline-none focus:border-emerald-400"
             />
           </div>
 
           <div>
             <label className="block text-slate-400 mb-1">Target Weight (kg):</label>
             <input
-              type="number"
-              value={formData.targetWeightKg}
-              onChange={(e) => setFormData({ ...formData, targetWeightKg: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white font-medium"
+              type="text"
+              inputMode="decimal"
+              placeholder="--"
+              value={formData.targetWeightKg || ''}
+              onChange={(e) => {
+                const clean = e.target.value.replace(/[^0-9.]/g, '');
+                setFormData({ ...formData, targetWeightKg: clean === '' ? 0 : parseFloat(clean) });
+              }}
+              className="w-full px-3 py-2 bg-neutral-800 border border-white/10 rounded-xl text-white font-medium placeholder:text-slate-600 tabular-nums outline-none focus:border-emerald-400"
             />
           </div>
 

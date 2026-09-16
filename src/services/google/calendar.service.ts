@@ -133,3 +133,40 @@ export async function sync30DayMealPlanToCalendar(mealPlans: DailyMealPlan[]): P
 
   return { success: createdCount > 0, count: createdCount };
 }
+
+export async function syncBatchEventsToCalendar(
+  events: Array<{ summary: string; description: string; startDateTime: string; endDateTime: string }>
+): Promise<{ success: boolean; count: number }> {
+  const token = getAccessToken();
+  if (!token) return { success: false, count: 0 };
+
+  let count = 0;
+  for (const ev of events) {
+    const payload = {
+      summary: ev.summary,
+      description: ev.description,
+      start: { dateTime: ev.startDateTime },
+      end: { dateTime: ev.endDateTime },
+      reminders: {
+        useDefault: false,
+        overrides: [{ method: 'popup', minutes: 15 }],
+      },
+    };
+
+    try {
+      const res = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) count++;
+    } catch (e) {
+      console.error('Error creating calendar event:', e);
+    }
+  }
+
+  return { success: count > 0, count };
+}

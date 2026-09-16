@@ -59,6 +59,59 @@ export async function createGoogleTaskItem(taskListId: string, title: string, no
   }
 }
 
+export async function fetchGoogleTasks(customTaskListId?: string): Promise<Array<{ id: string; title: string; status: 'needsAction' | 'completed' }>> {
+  const token = getAccessToken();
+  if (!token) return [];
+
+  const taskListId = customTaskListId || (await getOrCreateHealthTaskList());
+  if (!taskListId) return [];
+
+  try {
+    const res = await fetch(`https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks?showCompleted=true&showHidden=true`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.items || []).map((t: any) => ({
+      id: t.id,
+      title: t.title,
+      status: t.status as 'needsAction' | 'completed',
+    }));
+  } catch (err) {
+    console.error('Failed to fetch Google Tasks:', err);
+    return [];
+  }
+}
+
+export async function updateGoogleTaskStatus(
+  taskId: string,
+  completed: boolean,
+  customTaskListId?: string
+): Promise<boolean> {
+  const token = getAccessToken();
+  if (!token) return false;
+
+  const taskListId = customTaskListId || (await getOrCreateHealthTaskList());
+  if (!taskListId) return false;
+
+  try {
+    const res = await fetch(`https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: completed ? 'completed' : 'needsAction',
+      }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('Failed to update task status in Google Tasks:', err);
+    return false;
+  }
+}
+
 /**
  * Creates today's full health action items checklist in Google Tasks
  */
