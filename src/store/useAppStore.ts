@@ -98,6 +98,41 @@ const INITIAL_STORE: HealthPlannerStore = {
   },
 };
 
+function sanitizeAndMergeStore(rawStore: any): HealthPlannerStore {
+  if (!rawStore) return INITIAL_STORE;
+  return {
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    meta: {
+      lastModified: rawStore.meta?.lastModified || new Date().toISOString(),
+      deviceId: rawStore.meta?.deviceId || crypto.randomUUID(),
+    },
+    profile: {
+      ...DEFAULT_PROFILE,
+      ...(rawStore.profile || {}),
+      dietMode: rawStore.profile?.dietMode || 'intermittent_fasting_16_8',
+      medicalConditions: Array.isArray(rawStore.profile?.medicalConditions) ? rawStore.profile.medicalConditions : [],
+      dietaryRestrictions: Array.isArray(rawStore.profile?.dietaryRestrictions) ? rawStore.profile.dietaryRestrictions : ['Vegetarian'],
+      allergies: Array.isArray(rawStore.profile?.allergies) ? rawStore.profile.allergies : [],
+    },
+    fastingState: {
+      isFasting: rawStore.fastingState?.isFasting ?? true,
+      fastStartTime: rawStore.fastingState?.fastStartTime ?? new Date(Date.now() - 14 * 60 * 60 * 1000).toISOString(),
+      fastTargetHours: rawStore.fastingState?.fastTargetHours ?? 16,
+      fastEndTime: rawStore.fastingState?.fastEndTime ?? null,
+    },
+    dailyLogs: rawStore.dailyLogs || {},
+    medicalMarkers: Array.isArray(rawStore.medicalMarkers) && rawStore.medicalMarkers.length > 0 ? rawStore.medicalMarkers : INITIAL_STORE.medicalMarkers,
+    gamification: {
+      ...INITIAL_STORE.gamification,
+      ...(rawStore.gamification || {}),
+    },
+    settings: {
+      ...INITIAL_STORE.settings,
+      ...(rawStore.settings || {}),
+    },
+  };
+}
+
 export const useAppStore = create<AppStoreState>((set, get) => ({
   store: INITIAL_STORE,
   isInitialized: false,
@@ -109,17 +144,15 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
 
   initStore: async () => {
     const loaded = await loadLocalStore();
-    if (loaded) {
-      set({ store: loaded, isInitialized: true });
-    } else {
-      await saveLocalStore(INITIAL_STORE);
-      set({ store: INITIAL_STORE, isInitialized: true });
-    }
+    const cleanStore = sanitizeAndMergeStore(loaded);
+    await saveLocalStore(cleanStore);
+    set({ store: cleanStore, isInitialized: true });
   },
 
   setCompleteStore: async (newStore) => {
-    set({ store: newStore });
-    await saveLocalStore(newStore);
+    const cleanStore = sanitizeAndMergeStore(newStore);
+    set({ store: cleanStore });
+    await saveLocalStore(cleanStore);
   },
 
   updateProfile: async (profileData) => {
@@ -172,8 +205,9 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
   endFast: async () => {
     const state = get();
     const now = new Date().toISOString();
+    const currentFasting = state.store.fastingState || INITIAL_STORE.fastingState;
     const updatedFasting: FastingState = {
-      ...state.store.fastingState,
+      ...currentFasting,
       isFasting: false,
       fastEndTime: now,
     };

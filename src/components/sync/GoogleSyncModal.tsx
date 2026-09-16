@@ -46,7 +46,7 @@ export const GoogleSyncModal: React.FC = () => {
     }
 
     setActionStatus('Scheduling Fasting Alarms in Google Calendar...');
-    const res = await syncFastingWindowToCalendar(store.fastingState.fastTargetHours || 16);
+    const res = await syncFastingWindowToCalendar(store.fastingState?.fastTargetHours || 16);
     if (res.success) {
       setActionStatus(`Created ${res.count} Fasting & Eating Window reminders in your Google Calendar!`);
     } else {

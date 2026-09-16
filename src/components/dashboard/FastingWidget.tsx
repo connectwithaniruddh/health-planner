@@ -4,7 +4,12 @@ import { Timer, Zap, Flame, ShieldAlert, Sparkles, Play, Square } from 'lucide-r
 
 export const FastingWidget: React.FC = () => {
   const { store, startFast, endFast } = useAppStore();
-  const fasting = store.fastingState;
+  const fasting = store.fastingState || {
+    isFasting: false,
+    fastStartTime: null,
+    fastTargetHours: 16,
+    fastEndTime: null,
+  };
 
   const [elapsedMinutes, setElapsedMinutes] = useState(0);
 
