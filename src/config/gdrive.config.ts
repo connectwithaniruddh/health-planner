@@ -1,6 +1,6 @@
 // Google OAuth 2.0 PKCE Client Configuration
 // Web Client ID authorized for https://connectwithaniruddh.github.io
-export const GOOGLE_CLIENT_ID = '358741892401-v6898q8072124584903214781.apps.googleusercontent.com'; // User can replace with their GCP Client ID
+export const GOOGLE_CLIENT_ID = '897358453930-ei1mpjk3c8a60k7nr0jkgliltg7hncsk.apps.googleusercontent.com';
 export const GOOGLE_API_KEY = ''; // Restricted Client-side API Key (optional for public endpoints)
 
 export const GOOGLE_SCOPES = {
