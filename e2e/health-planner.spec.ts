@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 
 async function finishOnboarding(page: Page) {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Continue with this device' }).click();
   await page.getByLabel('What should we call you?').fill('Test planner');
   for (let step = 0; step < 6; step++) await page.getByRole('button', { name: 'Continue' }).click();
   await page.getByRole('button', { name: 'Start my planner' }).click();

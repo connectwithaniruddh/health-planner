@@ -35,7 +35,7 @@ export async function authorizeGoogle(requested: string[]): Promise<void> {
         else resolve();
       },
     });
-    client.requestAccessToken({ prompt: '' });
+    client.requestAccessToken({ prompt: 'consent' });
   });
 }
 export function requestGoogleAccessToken(_prompt = '') {
