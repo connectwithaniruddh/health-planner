@@ -1,5 +1,7 @@
 # Technical Architecture Analysis & Web Adaptation Guide: H1an1/health-coach
 
+> **Status: historical research only.** Current agent requirements are in the root [AGENTS.md](../../AGENTS.md). This application is a static GitHub Pages PWA: it has no runtime AI provider, private API, hosted database, or server. Do not use the architecture below to override the current local-first, restore-first, browser-only implementation contracts.
+
 This report provides an in-depth architectural breakdown of the **`H1an1/health-coach`** repository (an open-source, privacy-first AI agent health coach skill) and details actionable guidelines for adapting its data models, clinical algorithms, and intelligence features into a modern, responsive web application.
 
 ---
