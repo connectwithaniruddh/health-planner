@@ -1,0 +1,7 @@
+export interface CatalogIngredient { foodId:string; name:string; grams:number }
+export interface CatalogRecipe { id:string;name:string;cuisine:string;region:string;dietaryType:'VEGAN'|'VEGETARIAN'|'EGGETARIAN'|'NON_VEGETARIAN';ingredients:CatalogIngredient[];servings:number;instructions:string[];minutes:number;nutrients:{calories:number|null;protein:number|null;carbs:number|null;fat:number|null;fiber:number|null;sodium:number|null;saturatedFat:number|null};allergens:string[];tags:string[];sourceId?:string;nutritionBasis?:string;reviewStatus?:string }
+export interface CatalogBiomarker {id:string;name:string;canonicalUnit:string;sourceId:string;reviewStatus:string}
+export interface Catalog {recipes:CatalogRecipe[];biomarkers:CatalogBiomarker[];manifest:CatalogManifest}
+export interface CatalogManifest {version:string;file:string;sha256:string;counts:Record<string,number>;sources:unknown[];limitations:string[]}
+let cache:Promise<Catalog>|undefined;
+export function loadCatalog():Promise<Catalog>{return cache??=new Promise((resolve,reject)=>{const worker=new Worker(new URL('./worker.ts',import.meta.url),{type:'module'});worker.onmessage=(e)=>{worker.terminate();e.data.ok?resolve(e.data.value):reject(new Error(e.data.error));};worker.onerror=()=>{worker.terminate();reject(new Error('Offline catalog worker failed to start.'));};worker.postMessage({type:'load',base:import.meta.env.BASE_URL});});}

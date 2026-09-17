@@ -1,0 +1,83 @@
+{
+  "version": "1.1.0",
+  "schemaVersion": 2,
+  "file": "health-catalog.sqlite",
+  "sha256": "75781ba253728042732d488d62bf88f75fb3d93e8964e006b8d87e07bb194404",
+  "sourceArchiveSha256": "79705f75a7306d0910ad16dd4d66a5caf602dad528b99b77c7a510bfaf3d6e14",
+  "counts": {
+    "foods": 7809,
+    "sourcedFoods": 7793,
+    "indianRecipes": 300,
+    "globalRecipes": 100,
+    "biomarkers": 30,
+    "demonstratedExercises": 70,
+    "starterRoutines": 12
+  },
+  "sources": [
+    {
+      "id": "usda-sr-legacy-2018",
+      "title": "USDA National Nutrient Database for Standard Reference, Legacy Release (2018)",
+      "url": "https://www.ars.usda.gov/ARSUserFiles/80400525/Data/SR-Legacy/SR-Leg_ASC.zip",
+      "documentationUrl": "https://fdc.nal.usda.gov/data-documentation/",
+      "license": "US public domain; attribution to USDA FoodData Central requested",
+      "retrievedAt": "2026-09-17",
+      "kind": "food-composition",
+      "reviewStatus": "source-imported"
+    },
+    {
+      "id": "authored-recipes-v1",
+      "title": "Health Planner original home-cooking recipe adaptations",
+      "url": null,
+      "license": "Project-authored original recipe formulations; nutrient source separately attributed to USDA",
+      "retrievedAt": "2026-09-17",
+      "kind": "authored",
+      "reviewStatus": "not-clinically-reviewed"
+    },
+    {
+      "id": "niddk-diabetes",
+      "title": "NIDDK: Healthy Living with Diabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/healthy-living-with-diabetes",
+      "license": "Reference link; no article reproduction",
+      "retrievedAt": "2026-09-17",
+      "kind": "education"
+    },
+    {
+      "id": "niddk-a1c",
+      "title": "NIDDK: The A1C Test & Diabetes",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+      "license": "Reference link; no article reproduction",
+      "retrievedAt": "2026-09-17",
+      "kind": "education"
+    },
+    {
+      "id": "niddk-masld",
+      "title": "NIDDK: Eating, Diet & Nutrition for NAFLD & NASH",
+      "url": "https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/eating-diet-nutrition",
+      "license": "Reference link; no article reproduction",
+      "retrievedAt": "2026-09-17",
+      "kind": "education"
+    },
+    {
+      "id": "nhlbi-dash",
+      "title": "NHLBI: Living with DASH",
+      "url": "https://www.nhlbi.nih.gov/health/dash/living-with-dash",
+      "license": "Reference link; no article reproduction",
+      "retrievedAt": "2026-09-17",
+      "kind": "education"
+    },
+    {
+      "id": "medlineplus-tests",
+      "title": "MedlinePlus medical tests",
+      "url": "https://medlineplus.gov/lab-tests/",
+      "license": "Reference link; definitions are authored summaries",
+      "retrievedAt": "2026-09-17",
+      "kind": "biomarker-definitions"
+    }
+  ],
+  "limitations": [
+    "Recipes are authored home-cooking adaptations, not verified traditional formulations or clinical prescriptions.",
+    "Ingredient-summed nutrition is an estimate; unsupported ingredients make affected recipe nutrients unknown, never zero.",
+    "USDA SR Legacy is a fixed 2018 reference, not live branded food data.",
+    "Knowledge catalog contains no private health records."
+  ]
+}

@@ -13,13 +13,12 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Health Planner - Weight Loss & Calorie Tracker',
+        name: 'Health Planner',
         short_name: 'HealthPlanner',
-        description: 'Responsive health planner web app with Indian food dataset, calculators, gamification, and Google Drive sync',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        description: 'Private, offline-first meal, movement, and health planning',
+        theme_color: '#0c1b18',
+        background_color: '#0c1b18',
         display: 'standalone',
-        orientation: 'portrait',
         scope: BASE_PATH,
         start_url: BASE_PATH,
         icons: [
@@ -36,7 +35,8 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,wasm,sqlite,json}'],
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024
       }
     })
   ],

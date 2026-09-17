@@ -1,162 +1,19 @@
-import React, { useEffect } from 'react';
-import { useAppStore } from './store/useAppStore';
-import { startContinuousAutoSync } from './services/sync/autoSync.service';
-import { Header } from './components/layout/Header';
-import { Sidebar } from './components/layout/Sidebar';
-import { MobileNav } from './components/layout/MobileNav';
-import { FuelGauge } from './components/dashboard/FuelGauge';
-import { FastingWidget } from './components/dashboard/FastingWidget';
-import { HumanAvatarWidget } from './components/dashboard/HumanAvatarWidget';
-import { ClinicalAdvisoryWidget } from './components/dashboard/ClinicalAdvisoryWidget';
-import { DailyHabitsWidget } from './components/dashboard/DailyHabitsWidget';
-import { InteractiveTrendsWidget } from './components/dashboard/InteractiveTrendsWidget';
-import { StreakWidget } from './components/dashboard/StreakWidget';
-import { BossFightWidget } from './components/dashboard/BossFightWidget';
-import { MacroRings } from './components/dashboard/MacroRings';
-import { OnboardingModal } from './components/onboarding/OnboardingModal';
-import { FoodLogModal } from './components/food/FoodLogModal';
-import { CalculatorsView } from './components/calculators/CalculatorsView';
-import { UserProfileModal } from './components/profile/UserProfileModal';
-import { HealthReportView } from './components/reports/HealthReportView';
-import { GoogleSyncModal } from './components/sync/GoogleSyncModal';
-import { Calendar as CalendarIcon, Droplets, Moon, Scale, Plus, Sparkles } from 'lucide-react';
-
-export const App: React.FC = () => {
-  const { store, isInitialized, initStore, activeTab, selectedDate, setSelectedDate, logWater, logSleep, logWeight } = useAppStore();
-
-  useEffect(() => {
-    initStore();
-    startContinuousAutoSync();
-  }, [initStore]);
-
-  if (!isInitialized) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-400 to-cyan-500 flex items-center justify-center animate-spin">
-            <Sparkles className="w-6 h-6 text-white" />
-          </div>
-          <div className="animate-pulse text-slate-300 font-rounded text-sm font-semibold tracking-wider uppercase">
-            Initializing Health Planner...
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const dailyLog = store.dailyLogs[selectedDate] || { waterMl: 0, sleepHours: 0, foodLogs: [], exerciseLogs: [] };
-
-  return (
-    <div className="min-h-screen bg-black text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white">
-      {/* Onboarding Wizard for New Users */}
-      {!store.profile.isOnboarded && <OnboardingModal />}
-
-      {/* Top Glass Header with Live Continuous Sync */}
-      <Header />
-
-      <div className="flex-1 flex overflow-hidden">
-        {/* Desktop Sidebar */}
-        <Sidebar />
-
-        {/* Main Content Body */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 md:pb-8 max-w-7xl mx-auto w-full space-y-6">
-          {/* Dashboard Tab */}
-          {activeTab === 'dashboard' && (
-            <div className="space-y-6">
-              {/* Clinical Advisory Card (High priority for Fatty Liver, Diabetes, B12, D3, Iron) */}
-              <ClinicalAdvisoryWidget />
-
-              {/* Date Bar & Quick Log Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-3xl bg-neutral-900/60 border border-white/10 backdrop-blur-xl">
-                <div className="flex items-center gap-3">
-                  <CalendarIcon className="w-5 h-5 text-emerald-400" />
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="bg-neutral-800 border border-neutral-700 text-white text-sm font-bold px-3 py-1.5 rounded-xl focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
-
-                {/* Quick Trackers (Water, Sleep, Weight) with input sanitization */}
-                <div className="flex items-center gap-2 overflow-x-auto text-xs">
-                  <button
-                    onClick={() => logWater(250)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 hover:bg-cyan-500/20 transition-all"
-                  >
-                    <Droplets className="w-3.5 h-3.5" />
-                    <span>+250ml ({dailyLog.waterMl}ml)</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      const h = prompt('Enter sleep hours:', String(dailyLog.sleepHours || 8));
-                      if (h) logSleep(Number(h));
-                    }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-300 hover:bg-purple-500/20 transition-all"
-                  >
-                    <Moon className="w-3.5 h-3.5" />
-                    <span>{dailyLog.sleepHours || 0}h Sleep</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      const w = prompt('Enter today weight (kg):', String(store.profile.currentWeightKg));
-                      if (w) logWeight(Number(w));
-                    }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/20 transition-all"
-                  >
-                    <Scale className="w-3.5 h-3.5" />
-                    <span>{store.profile.currentWeightKg}kg Weight</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Hero Row: Fuel Gauge & Fasting Protocol */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <FuelGauge />
-                <FastingWidget />
-              </div>
-
-              {/* Visual Human Figure Gamification & Interactive Trends */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <HumanAvatarWidget />
-                <InteractiveTrendsWidget />
-              </div>
-
-              {/* Daily Habits & Google Tasks Two-Way Sync + Macro Adherence */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <DailyHabitsWidget />
-                <MacroRings />
-              </div>
-
-              {/* Gamification Streak & Monster Battle */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <StreakWidget />
-                <BossFightWidget />
-              </div>
-            </div>
-          )}
-
-          {/* Food Log Tab */}
-          {activeTab === 'food' && <FoodLogModal />}
-
-          {/* Calculators & Tools Tab */}
-          {activeTab === 'calculators' && <CalculatorsView />}
-
-          {/* User Profile Tab */}
-          {activeTab === 'profile' && <UserProfileModal />}
-
-          {/* Reports Tab */}
-          {activeTab === 'reports' && <HealthReportView />}
-
-          {/* Google Sync Tab */}
-          {activeTab === 'sync' && <GoogleSyncModal />}
-        </main>
-      </div>
-
-      {/* Floating Bottom Pill Dock for Mobile */}
-      <MobileNav />
-    </div>
-  );
-};
+import {useEffect,useState} from 'react';
+import {CalendarDays,ChefHat,Activity,HeartPulse,BarChart3,Settings,Menu,Plus,GlassWater,Moon,Scale,Download,Upload} from 'lucide-react';
+import {useHealthStore} from './domain/healthStore';
+import {Onboarding} from './features/Onboarding';
+import {MealPlanner} from './features/MealPlanner';
+import {Exercise} from './features/Exercise';
+import {Health} from './features/Health';
+import {Insights} from './features/Insights';
+import {Glass} from './features/Glass';
+import {today,dateLabel} from './features/dates';
+type Tab='today'|'plan'|'exercise'|'health'|'insights'|'settings';
+const tabs:{id:Tab;label:string;icon:any}[]=[{id:'today',label:'Today',icon:CalendarDays},{id:'plan',label:'Meal plan',icon:ChefHat},{id:'exercise',label:'Exercise',icon:Activity},{id:'health',label:'Health',icon:HeartPulse},{id:'insights',label:'Insights',icon:BarChart3},{id:'settings',label:'Settings',icon:Settings}];
+const currentTab=():Tab=>{const value=location.hash.replace('#/','') as Tab;return tabs.some(t=>t.id===value)?value:'today';};
+export function App(){const store=useHealthStore();const [tab,setTab]=useState<Tab>(currentTab);const [mobile,setMobile]=useState(false);useEffect(()=>{void store.init();const h=()=>setTab(currentTab());addEventListener('hashchange',h);return()=>removeEventListener('hashchange',h);},[]);const go=(id:Tab)=>{location.hash=`/${id}`;setTab(id);setMobile(false);};if(!store.ready)return <div className="splash"><div className="orbit"/><p>Opening your offline planner…</p></div>;if(!store.state.profile.onboarded)return <main className="onboarding-page"><Onboarding/></main>;return <div className={`app-shell theme-${store.state.settings.theme} ${store.state.settings.reduceTransparency?'reduced-transparency':''}`}><aside className="app-sidebar"><Brand/><nav aria-label="Main navigation">{tabs.map(t=><NavButton key={t.id} tab={t} active={tab===t.id} onClick={()=>go(t.id)}/>)}</nav><div className="sidebar-bottom"><p>Personal data stays on this device.</p><button onClick={()=>go('settings')}>Privacy & recovery</button></div></aside><header className="mobile-top"><Brand/><button aria-label="Open navigation" onClick={()=>setMobile(!mobile)}><Menu/></button></header>{mobile&&<nav className="mobile-menu" aria-label="Mobile navigation">{tabs.map(t=><NavButton key={t.id} tab={t} active={tab===t.id} onClick={()=>go(t.id)}/>)}</nav>}<main className="app-main">{store.error&&<div className="notice error" role="alert">{store.error}<button onClick={store.clearError}>Dismiss</button></div>}{tab==='today'&&<Today/>}{tab==='plan'&&<MealPlanner/>}{tab==='exercise'&&<Exercise/>}{tab==='health'&&<Health/>}{tab==='insights'&&<Insights/>}{tab==='settings'&&<SettingsPage/>}</main><Glass className="mobile-dock" disabled={store.state.settings.reduceTransparency}>{tabs.slice(0,5).map(t=>{const I=t.icon;return <button key={t.id} aria-label={t.label} aria-current={tab===t.id?'page':undefined} onClick={()=>go(t.id)}><I size={20}/><span>{t.label}</span></button>})}</Glass></div>;}
+function Brand(){return <div className="brand"><span className="brand-mark">H</span><span>Health<br/><em>Planner</em></span></div>}
+function NavButton({tab,active,onClick}:{tab:{id:Tab;label:string;icon:any};active:boolean;onClick:()=>void}){const Icon=tab.icon;return <button className={active?'nav-active':''} aria-current={active?'page':undefined} onClick={onClick}><Icon size={19}/><span>{tab.label}</span></button>}
+function Today(){const {state,update}=useHealthStore();const date=today(state.profile.timezone);const plan=state.plans[0];const meals=(plan?.entries||[]).filter((e:any)=>e.date===date);const workouts=(state.occurrences||[]).filter((x:any)=>x.date===date&&!x.cancelled);const diary=state.diary.find((x:any)=>x.date===date)||{};const first=state.profile.name.split(' ')[0]||'there';const agenda=[...meals.map((m:any)=>({kind:'Meal',name:m.recipe.name,detail:m.slot,locked:m.locked})),...workouts.map((w:any)=>({kind:'Workout',name:w.title,detail:w.startTime}))];return <div className="page-stack"><section className="today-hero"><div><span className="eyebrow">{dateLabel(date,{weekday:'long',day:'numeric',month:'long'})}</span><h1>Good morning, {first}.<br/><em>Make today feel lighter.</em></h1><p>Your plan is a guide. Log what happens, then keep going.</p><div className="button-row"><button className="primary" onClick={()=>location.hash='/plan'}><ChefHat size={17}/> See today’s meals</button><button className="secondary" onClick={()=>location.hash='/exercise'}><Activity size={17}/> Start a movement</button></div></div><div className="scenic-panel"><span>Today’s intention</span><strong>Small, repeatable care</strong><p>{meals.length?`${meals.length} meals planned`: 'Build your first meal plan when you’re ready'}</p></div></section><section className="agenda-grid"><section className="surface"><div className="section-heading"><div><span className="eyebrow">YOUR AGENDA</span><h2>What’s next</h2></div><span className="pill">{agenda.length} items</span></div>{agenda.length?<ol className="agenda-list">{agenda.map((item:any,i)=><li key={`${item.kind}-${i}`}><span className="agenda-marker">{item.kind==='Meal'?<ChefHat size={16}/>:<Activity size={16}/>}</span><div><strong>{item.name}</strong><small>{item.kind} · {item.detail}{item.locked?' · locked':''}</small></div></li>)}</ol>:<p className="empty-state">No items planned yet. Start with a meal or a short routine.</p>}</section><section className="surface soft"><span className="eyebrow">CHECK IN</span><h2>Notice what supports you</h2><p className="muted">Quick records are optional. Missing days remain blank.</p><div className="quick-grid"><Quick icon={<GlassWater/>} label="Water" value={`${diary.waterMl||0} ml`} onClick={()=>void update(s=>{const row=s.diary.find((x:any)=>x.date===date);if(row)row.waterMl=(row.waterMl||0)+250;else s.diary.push({id:crypto.randomUUID(),date,waterMl:250});})}/><Quick icon={<Moon/>} label="Sleep" value={diary.sleepHours===undefined?'Add':`${diary.sleepHours} h`} onClick={()=>{const value=prompt('Sleep hours',String(diary.sleepHours??''));if(value!==null&&value!==''&&!Number.isNaN(Number(value)))void update(s=>{const row=s.diary.find((x:any)=>x.date===date);if(row)row.sleepHours=Number(value);else s.diary.push({id:crypto.randomUUID(),date,sleepHours:Number(value)});});}}/><Quick icon={<Scale/>} label="Weight" value={diary.weightKg===undefined?'Add':`${diary.weightKg} kg`} onClick={()=>{const value=prompt('Weight in kg',String(diary.weightKg??''));if(value!==null&&value!==''&&!Number.isNaN(Number(value)))void update(s=>{const row=s.diary.find((x:any)=>x.date===date);if(row)row.weightKg=Number(value);else s.diary.push({id:crypto.randomUUID(),date,weightKg:Number(value)});s.profile.weightKg=Number(value);});}}/></div></section></section><section className="surface"><div className="section-heading"><div><span className="eyebrow">A GENTLE REMINDER</span><h2>Healthy planning adapts</h2></div></div><p>A date, unit, and source make your lab history more useful. Meal estimates are transparent, and no meal, marker, or skipped workout is treated as a verdict.</p></section></div>}
+function Quick({icon,label,value,onClick}:{icon:any;label:string;value:string;onClick:()=>void}){return <button onClick={onClick}>{icon}<span>{label}</span><strong>{value}</strong><Plus size={14}/></button>}
+function SettingsPage(){const {state,update,exportData,importData}=useHealthStore();const [status,setStatus]=useState('');const profile=state.profile;return <div className="page-stack"><header><span className="eyebrow">SETTINGS & RECOVERY</span><h1>Your data, your control</h1><p className="muted">Private records live in this browser. Export a copy before clearing browser data or changing devices.</p></header><section className="workspace-split"><section className="surface"><h2>Appearance</h2><div className="form-grid"><label>Appearance<select value={state.settings.theme} onChange={e=>void update(s=>{s.settings.theme=e.target.value;})}><option value="dark">Dark</option><option value="light">Light</option></select></label><label className="toggle"><input type="checkbox" checked={state.settings.reduceTransparency} onChange={e=>void update(s=>{s.settings.reduceTransparency=e.target.checked;})}/> Reduce transparency</label></div><h2>Profile</h2><div className="form-grid"><label>Name<input value={profile.name} onChange={e=>void update(s=>{s.profile.name=e.target.value;})}/></label><label>Daily planning reference<input type="number" min="800" max="6000" value={profile.targetCalories||''} placeholder="Optional kcal" onChange={e=>void update(s=>{s.profile.targetCalories=e.target.value?Number(e.target.value):undefined;})}/></label><label>Clinician instructions<textarea value={profile.clinicalNotes} onChange={e=>void update(s=>{s.profile.clinicalNotes=e.target.value;})}/></label></div></section><section className="surface"><h2>Recovery</h2><p>Export contains only your personal records, never the food catalog or OAuth access token.</p><div className="button-row"><button className="primary" onClick={()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([exportData()],{type:'application/json'}));a.download=`health-planner-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href);setStatus('Backup downloaded.');}}><Download size={17}/> Export backup</button><label className="file-button"><Upload size={17}/> Import backup<input type="file" accept="application/json" onChange={async e=>{const f=e.target.files?.[0];if(!f)return;setStatus(await importData(await f.text())?'Backup imported and merged.':'Import was rejected; your current records are unchanged.');e.target.value='';}}/></label></div>{state.conflicts.length>0&&<p className="notice error">{state.conflicts.length} concurrent edit conflict(s) retained. Export a backup, then review the newest records before removing duplicates.</p>}{status&&<p className="notice" role="status">{status}</p>}<h2>Connections</h2><p className="muted">Google Calendar and Tasks are available from Exercise. Connections use temporary browser authorization; no token is stored in this export.</p></section></section></div>}
