@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Play, Pause, Check, RotateCcw, Timer, ChevronRight, CalendarPlus, HeartPulse, Edit2, Trash2, X, Plus } from 'lucide-react';
+import { Play, Pause, Check, RotateCcw, Timer, ChevronRight, CalendarPlus, HeartPulse, Edit2, Trash2, X, Plus, ExternalLink } from 'lucide-react';
 import { useHealthStore } from '../domain/healthStore';
 import { today, addDays, dateLabel } from './dates';
 import { IntegrationPanel, type IntegrationOccurrence } from '../integrations/IntegrationPanel';
@@ -90,25 +90,105 @@ const routines = [
   ['Weekend walk', ['brisk-walk-2', 'hip-hinge-drill-0', 'chest-opener-0']]
 ] as const;
 
-// Realistic photographic exercise guide replacing stick figures
-function demo(exercise: Exercise) {
-  const imgSrc =
-    exercise.category === 'Walk & cardio' || exercise.category === 'Balance'
-      ? `${import.meta.env.BASE_URL}graphics/exercise_cardio.jpg`
-      : exercise.category === 'Yoga' || exercise.category === 'Mobility'
-      ? `${import.meta.env.BASE_URL}graphics/exercise_mobility.jpg`
-      : `${import.meta.env.BASE_URL}graphics/exercise_strength.jpg`;
+// Curated quick YouTube video guides for exercises & desk movements
+const exerciseVideoMap: Record<string, { id: string; title: string }> = {
+  // Desk & Glucose Clearing Movements
+  'seated-soleus-pushup': { id: 'qK420l8I5BY', title: 'Soleus Pushup & Seated Calf Raise Form' },
+  'seated-figure-hip-stretch': { id: 'xNqUHQvJv3w', title: 'Seated Figure-4 Hip & Glute Stretch' },
+  'desk-incline-push-up': { id: 'HmKlyaP3AsV', title: 'Desk Incline Push-Up Technique' },
+  'chin-tuck-thoracic-extension': { id: 'q_tS5Z5gQ-o', title: 'Chin Tucks & Upper Back Posture Reset' },
+  'post-meal-glucose-walk': { id: 'rO_my2Lqf_M', title: '10-Min Post-Meal Walking Workout' },
 
+  // Cardio & Functional Walks
+  'brisk-walk': { id: 'enYITYwvPAQ', title: 'Brisk Walking Technique' },
+  'march-in-place': { id: 'c-S8sP1pUj0', title: 'March in Place Low Impact Cardio' },
+  'step-up': { id: '3wB_N_wK0d8', title: 'Step Up Exercise Tutorial' },
+
+  // Strength & Core
+  'sit-to-stand': { id: 'GJ1PUehH2kn', title: 'Sit to Stand Chair Squats Form' },
+  'wall-push-up': { id: 'HmKlyaP3AsV', title: 'Wall Push-Up for Absolute Beginners' },
+  'glute-bridge': { id: 'OUgsJ8-Vigk', title: 'Glute Bridge Exercise Guide' },
+  'bird-dog': { id: 'wiFNA3sqjCA', title: 'Bird Dog Core Stability' },
+  'dead-bug': { id: 'g_BYB0R-4Ws', title: 'Dead Bug Abdominal Exercise' },
+  'band-row': { id: 'dhk7Q8P7_bY', title: 'Resistance Band Row Technique' },
+  'calf-raise': { id: 'qK420l8I5BY', title: 'Calf Raise Tutorial' },
+
+  // Mobility & Yoga
+  'cat-cow': { id: 'K_I_O_3b6qQ', title: 'Cat-Cow Spinal Mobility Stretch' },
+  'hip-hinge-drill': { id: 'l23bQfF-bY0', title: 'Hip Hinge Movement Tutorial' },
+  'ankle-circles': { id: 'M3y27G9a4Yg', title: 'Ankle Mobility Circles' },
+  'chest-opener': { id: 'y4Kz4y8aX5M', title: 'Chest Opener & Shoulder Stretch' },
+  'single-leg-balance': { id: 'vGj-0eYQkL4', title: 'Single-Leg Balance Training' },
+  'heel-to-toe-walk': { id: 'd0Z0uQ6a_iM', title: 'Heel-to-Toe Tandem Walk' },
+  'seated-march': { id: 'c-S8sP1pUj0', title: 'Seated March Chair Exercise' },
+  'seated-press': { id: 'L8g3V0FzZ1Q', title: 'Seated Overhead Press Form' },
+  'box-breathing': { id: 'bF_1YZ51TWw', title: 'Box Breathing 4-4-4-4 Technique' },
+  'chair-sun-salutation': { id: 'H3vC2ZkP6q8', title: 'Chair Yoga Sun Salutation' }
+};
+
+function getVideoForExercise(exercise: Exercise) {
+  const baseKey = Object.keys(exerciseVideoMap).find(k => exercise.id.startsWith(k));
+  if (baseKey) return exerciseVideoMap[baseKey];
+
+  // Default fallback YouTube tutorials by category
+  if (exercise.category === 'Walk & cardio') return { id: 'enYITYwvPAQ', title: 'Low Impact Cardio Walk' };
+  if (exercise.category === 'Mobility' || exercise.category === 'Yoga') return { id: 'K_I_O_3b6qQ', title: 'Gentle Mobility Flow' };
+  return { id: 'GJ1PUehH2kn', title: 'Functional Strength Tutorial' };
+}
+
+// Compact, responsive YouTube video guide replacing oversized static images
+function demo(exercise: Exercise, isDetailedView: boolean = false) {
+  const video = getVideoForExercise(exercise);
+
+  if (isDetailedView) {
+    return (
+      <div className="exercise-guide-container rounded-2xl overflow-hidden shadow-md border border-rule mb-3 bg-black/5 dark:bg-white/5">
+        <div className="relative w-full aspect-video">
+          <iframe
+            className="w-full h-full rounded-t-2xl border-0"
+            src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+        <div className="p-2.5 flex items-center justify-between text-xs">
+          <span className="font-bold text-ink truncate mr-2">{video.title}</span>
+          <a
+            href={`https://www.youtube.com/watch?v=${video.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-500 hover:text-red-600 font-semibold flex items-center gap-1 shrink-0"
+          >
+            <span>Open in YouTube</span>
+            <ExternalLink size={12} />
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // Compact card view preview with quick video launch
   return (
-    <div className="exercise-guide-container rounded-2xl overflow-hidden shadow-md border border-rule mb-2" aria-label={`Photographic demonstration for ${exercise.name}`}>
-      <img
-        className="exercise-snapshot w-full aspect-video object-cover"
-        src={imgSrc}
-        alt={`Photographic movement guide for ${exercise.name}`}
-      />
-      <div className="p-2 flex items-center justify-between text-xs bg-black/5 dark:bg-white/5">
-        <span className="font-bold text-ink">{exercise.name}</span>
-        <span className="text-muted text-[11px] font-semibold">{exercise.category} · {exercise.impact} impact</span>
+    <div className="exercise-guide-container rounded-xl overflow-hidden border border-rule mb-2 relative group bg-neutral-900">
+      <div className="relative w-full h-28 overflow-hidden flex items-center justify-center">
+        <img
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+          src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+          alt={video.title}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+          <div className="w-9 h-9 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+            <Play size={16} className="fill-white ml-0.5" />
+          </div>
+        </div>
+      </div>
+      <div className="px-2 py-1 flex items-center justify-between text-[11px] bg-black/10 dark:bg-white/5">
+        <span className="text-muted font-medium truncate">{exercise.category}</span>
+        <span className="text-red-500 font-bold text-[10px] flex items-center gap-0.5">
+          <span>YouTube Guide</span>
+        </span>
       </div>
     </div>
   );
@@ -226,7 +306,7 @@ export function Exercise() {
 
           {workout.map((e: Exercise, index: number) => (
             <article className="workout-step py-4 border-b border-rule" key={e.id}>
-              {demo(e)}
+              {demo(e, true)}
               <div>
                 <span className="eyebrow">MOVEMENT {index + 1} · {e.category}</span>
                 <h3>{e.name}</h3>
@@ -344,7 +424,7 @@ export function Exercise() {
           <button className="close p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10" onClick={() => setChosen(null)}>
             <X size={20} />
           </button>
-          {demo(chosen)}
+          {demo(chosen, true)}
           <span className="eyebrow text-xs font-bold">{chosen.category} · {chosen.impact} impact</span>
           <h2 className="text-xl font-bold mt-1 text-ink">{chosen.name}</h2>
           <p className="text-sm text-muted font-medium mt-1">
