@@ -197,21 +197,29 @@ function Today() {
     ...workouts.map((w: any) => ({ kind: 'Workout', name: w.title, detail: w.startTime }))
   ];
 
-  // Daily Tracker Task definitions for Diet & Exercise
+  // Clinical calculations for NAFLD & Metabolic Reversal Gauge
+  const curWeight = state.profile.weightKg || 75;
+  const initWeight = state.profile.initialWeightKg || curWeight;
+  const fivePercentLossKg = Number((initWeight * 0.05).toFixed(1));
+  const tenPercentLossKg = Number((initWeight * 0.10).toFixed(1));
+  const currentLossKg = Math.max(0, Number((initWeight - curWeight).toFixed(1)));
+  const nafldMilestonePercent = Math.min(100, Math.round((currentLossKg / fivePercentLossKg) * 100));
+
+  // Daily Tracker Task definitions for Diet & IT Desk-Worker Exercise
   const dietTasks = [
-    { id: 'diet_breakfast', label: 'Log Healthy Breakfast', category: 'diet' },
-    { id: 'diet_lunch', label: 'Log Balanced Lunch', category: 'diet' },
-    { id: 'diet_snack', label: 'Log Evening Snack (Nuts/Fruit)', category: 'diet' },
-    { id: 'diet_dinner', label: 'Log Light Dinner', category: 'diet' },
-    { id: 'diet_deficit', label: 'Maintain Daily Negative Deficit Target', category: 'diet' },
-    { id: 'diet_water', label: 'Drink 2,500ml+ Water', category: 'diet' }
+    { id: 'diet_breakfast', label: 'Log High-Fiber Breakfast (Moong/Besan Chilla)', category: 'diet' },
+    { id: 'diet_lunch', label: 'Balanced Plate (1/2 Greens & Veg, 1/4 Protein, 1/4 Jowar/Rice)', category: 'diet' },
+    { id: 'diet_snack', label: '4 PM Office Slump Rescue (Roasted Chana / Sattu / Makhana)', category: 'diet' },
+    { id: 'diet_dinner', label: 'Early Light Dinner (Pre-8 PM / 16:8 Fasting Window)', category: 'diet' },
+    { id: 'diet_water', label: 'Drink 2,500ml+ Water & Green/Black Tea', category: 'diet' },
+    { id: 'diet_liver_elixir', label: 'Morning Warm Water + Methi / Amla (Liver Lipophagy)', category: 'diet' }
   ];
 
   const exerciseTasks = [
-    { id: 'ex_morning_walk', label: '30-Min Brisk Walk / Morning Movement', category: 'exercise' },
-    { id: 'ex_desk_breaks', label: '2 Posture & Desk Stretch Breaks', category: 'exercise' },
-    { id: 'ex_workout', label: 'Complete Daily Workout / Routine', category: 'exercise' },
-    { id: 'ex_evening_stretch', label: 'Evening Mobility & Wind-Down Stretch', category: 'exercise' }
+    { id: 'ex_soleus', label: '10-Min Seated Soleus Pushups (During coding/meetings)', category: 'exercise' },
+    { id: 'ex_post_meal_walk', label: '10-15 Min Post-Meal Walk (Blunts Glucose Spike)', category: 'exercise' },
+    { id: 'ex_desk_stretch', label: 'Desk Posture: Chin Tuck & Figure-4 Hip Stretch', category: 'exercise' },
+    { id: 'ex_workout', label: 'Complete Daily Movement / 30-Min Cardio Session', category: 'exercise' }
   ];
 
   const allTasks = [...dietTasks, ...exerciseTasks];
@@ -246,24 +254,86 @@ function Today() {
             <em>Make today feel lighter.</em>
           </h1>
           <p className="muted text-sm mt-2">
-            Your plan is an adaptable guide. Complete small daily wins, log what happens, and stay consistent.
+            Your clinical plan is calibrated for desk longevity. Clear glucose, protect liver cells, and log small daily wins.
           </p>
           <div className="button-row mt-4 flex flex-wrap gap-3">
             <button className="primary-btn flex items-center gap-2" onClick={() => (location.hash = '/plan')}>
               <ChefHat size={17} /> See today’s meals
             </button>
             <button className="secondary-btn flex items-center gap-2" onClick={() => (location.hash = '/exercise')}>
-              <Activity size={17} /> Start a movement
+              <Activity size={17} /> Desk movement
+            </button>
+            <button className="secondary-btn flex items-center gap-2" onClick={() => (location.hash = '/health')}>
+              <HeartPulse size={17} /> Clinical Biometrics
             </button>
           </div>
         </div>
 
         <div className="scenic-panel">
           <span className="eyebrow text-xs uppercase text-emerald-300">Today’s Intention</span>
-          <strong className="text-2xl font-bold mt-1">Small, Repeatable Care</strong>
+          <strong className="text-2xl font-bold mt-1">Metabolic Resilience</strong>
           <p className="text-xs text-slate-200 mt-1">
-            {meals.length ? `${meals.length} meals planned for today` : 'Build your first meal plan when you’re ready'}
+            {meals.length ? `${meals.length} therapeutic meals planned` : 'Personalized for NAFLD & desk ergonomics'}
           </p>
+        </div>
+      </section>
+
+      {/* METABOLIC MILESTONE GAUGE (NAFLD / Hepatic Steatosis Reduction) */}
+      <section className="surface p-6 rounded-3xl border border-rule relative overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wide">
+                Liver & Lipids Focus
+              </span>
+              <span className="text-xs text-muted font-medium">AASLD / ICMR Clinical Benchmark</span>
+            </div>
+            <h2 className="text-xl font-bold text-ink flex items-center gap-2">
+              <Flame size={20} className="text-amber-500" />
+              Hepatic Lipophagy & Fat-Loss Milestone
+            </h2>
+            <p className="text-xs text-muted max-w-2xl">
+              Losing <strong>5% body weight ({fivePercentLossKg} kg)</strong> triggers hepatic macroautophagy, clearing <strong>30% to 50%</strong> of liver triglyceride accumulation and normalizing ALT/SGPT enzymes. A <strong>10% reduction ({tenPercentLossKg} kg)</strong> halts and reverses hepatic steatohepatitis (MASH) fibrosis.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 min-w-[200px] justify-between md:justify-end">
+            <div className="text-right">
+              <div className="text-2xl font-extrabold text-ink">{nafldMilestonePercent}%</div>
+              <div className="text-[11px] text-muted font-medium">{currentLossKg} / {fivePercentLossKg} kg to 5% Goal</div>
+            </div>
+            <div className="relative w-14 h-14 flex items-center justify-center">
+              <svg className="w-14 h-14 -rotate-90" viewBox="0 0 36 36">
+                <path
+                  className="text-neutral-200 dark:text-neutral-800"
+                  strokeWidth="3.5"
+                  stroke="currentColor"
+                  fill="none"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <path
+                  className="text-amber-500"
+                  strokeDasharray={`${nafldMilestonePercent}, 100`}
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  fill="none"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+              </svg>
+              <span className="absolute text-[11px] font-bold text-amber-500">5%</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 pt-3 border-t border-rule flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
+          <span>Current: <strong className="text-ink">{curWeight} kg</strong></span>
+          <span>5% Reversal Target: <strong className="text-emerald-500">{Number((initWeight - fivePercentLossKg).toFixed(1))} kg</strong></span>
+          <span>10% Fibrosis Reversal: <strong className="text-teal-500">{Number((initWeight - tenPercentLossKg).toFixed(1))} kg</strong></span>
+          <button onClick={() => (location.hash = '/health')} className="text-xs font-semibold text-emerald-500 hover:underline flex items-center gap-1">
+            <span>View Lab Trends</span>
+            <ArrowRight size={13} />
+          </button>
         </div>
       </section>
 

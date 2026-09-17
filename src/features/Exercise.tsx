@@ -41,7 +41,12 @@ const seeds: [string, Category, string, string, string][] = [
   ['Seated march', 'Seated', 'Chair', 'Hips', 'Sit tall and alternate lifting one knee at a time.'],
   ['Seated press', 'Seated', 'Water bottles', 'Shoulders', 'Press light objects overhead only through a comfortable range.'],
   ['Box breathing', 'Yoga', 'None', 'Breath', 'Inhale four, pause four, exhale four, pause four without strain.'],
-  ['Chair sun salutation', 'Yoga', 'Chair', 'Whole body', 'Use the chair to support a slow reach, fold, and stand sequence.']
+  ['Chair sun salutation', 'Yoga', 'Chair', 'Whole body', 'Use the chair to support a slow reach, fold, and stand sequence.'],
+  ['Seated soleus pushup', 'Seated', 'Desk chair', 'Soleus / Calves', 'Sit upright with knees bent 90°. Lift heels as high as possible while keeping balls of feet planted, pause 1s at top, release slowly. Activates oxidative muscle metabolism to clear circulating blood glucose & triglycerides without fatigue.'],
+  ['Seated figure-4 hip stretch', 'Mobility', 'Desk chair', 'Glutes & Piriformis', 'Sit tall, cross right ankle over left knee. Hinge gently forward from hips with a flat back until a deep stretch is felt in the outer hip. Hold 20-30s each side to reverse prolonged sitting stiffness.'],
+  ['Desk incline push-up', 'Strength', 'Sturdy desk', 'Chest & Triceps', 'Place hands shoulder-width on desk edge, walk feet back into a strong plank. Lower chest toward desk keeping elbows at 45°, press firmly away.'],
+  ['Chin tuck & thoracic extension', 'Mobility', 'Desk chair', 'Neck & Upper back', 'Sit tall, interlace fingers behind head, pull chin straight back like making a double chin, then gently arch upper back over the chair backrest to reverse laptop slouching.'],
+  ['Post-meal glucose walk', 'Walk & cardio', 'None', 'Cardiovascular', '10-15 minute casual to brisk walk within 30 minutes of finishing lunch or dinner. Activates muscle GLUT4 glucose transporters independently of insulin, blunting glucose and triglyceride spikes by up to 35%.']
 ];
 
 const variations = ['Foundation', 'Gentle', 'Steady', 'Supported'];
@@ -69,6 +74,8 @@ const exercises: Exercise[] = seeds.flatMap((s, base) =>
 );
 
 const routines = [
+  ['IT Desk-Job Rescue', ['seated-soleus-pushup-0', 'chin-tuck-thoracic-extension-0', 'seated-figure-hip-stretch-0']],
+  ['Post-Meal Glucose Clear', ['post-meal-glucose-walk-0', 'seated-soleus-pushup-0']],
   ['Gentle reset', ['cat-cow-0', 'sit-to-stand-1', 'seated-march-0']],
   ['Beginner strength', ['sit-to-stand-0', 'wall-push-up-0', 'glute-bridge-0']],
   ['Desk mobility', ['chest-opener-0', 'ankle-circles-0', 'cat-cow-0']],
